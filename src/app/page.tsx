@@ -6,7 +6,17 @@ import emailLogo from "../../public/email-1-svgrepo-com.svg";
 import resumeLogo from "../../public/page-document-my-page-empty-page-svgrepo-com.svg";
 import downArrow from "../../public/arrow-down-circle-svgrepo-com.svg";
 
-function Exp({ title, company, timePeriod, BulletPoints }) {
+function Exp({
+  title,
+  company,
+  timePeriod,
+  BulletPoints,
+}: {
+  title: string;
+  company: string;
+  timePeriod: string;
+  BulletPoints: string[];
+}) {
   return (
     <div className={`${mystyles.box}`}>
       <div className="p-2">
@@ -29,7 +39,15 @@ function Exp({ title, company, timePeriod, BulletPoints }) {
   );
 }
 
-function ContactBox({ link, src, alt }) {
+function ContactBox({
+  link,
+  src,
+  alt,
+}: {
+  link: string;
+  src: string;
+  alt: string;
+}) {
   return (
     <a href={link} target="_blank" rel="noopener noreferrer">
       <div className={mystyles.contactBox}>

@@ -102,7 +102,7 @@ export default function Home() {
             />
             <ContactBox
               link={
-                "https://github.com/wasmiester/WasiWebsite2.0/tree/main/public/Wasi_Raza_Resume.pdf"
+                "https://github.com/wasmiester/WasiWebsite2.0/raw/main/public/Wasi_Raza_Resume.pdf"
               }
               src={resumeLogo}
               alt="resume"

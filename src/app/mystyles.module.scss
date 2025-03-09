@@ -325,12 +325,10 @@
 
 
 .quoteContainerText {
-    color: white;
     border: 2px solid white;
     width: 50%;
     margin: 2em;
     border-radius: 28px;
-    align-items: end;
 }
 
 .testimonialImg {
@@ -339,3 +337,16 @@
     top: -1em;
 }
 
+
+.testamonialContainers {
+  display: flex;
+  flex-direction: column;
+}
+
+.testamonialContainers >:nth-child(odd) {
+  align-self: flex-start;
+}
+
+.testamonialContainers > *:nth-child(even) {
+  align-self: flex-end;
+}

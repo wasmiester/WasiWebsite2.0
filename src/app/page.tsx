@@ -144,13 +144,15 @@ export default function Home() {
             />
           </div>
         </div>
-        <div>
+        <div className={mystyles.testamonialContainers}>
           <div className="text-5xl m-5">Testamonials</div>
-          <Testamonials
-            name="Tony Huang | Java Developer at ZE PowerGroup"
-            quote="Wasi is a great team player who gets along well with everyone, which creates a positive work environment. He asks insightful questions that demonstrate his commitment to fully understanding projects and contributing effectively. Wasi's proactive approach and strong interpersonal skills make him a valuable asset to any team."
-          />
-          <div className="flex flex-row-reverse">
+          <div>
+            <Testamonials
+              name="Tony Huang | Java Developer at ZE PowerGroup"
+              quote="Wasi is a great team player who gets along well with everyone, which creates a positive work environment. He asks insightful questions that demonstrate his commitment to fully understanding projects and contributing effectively. Wasi's proactive approach and strong interpersonal skills make him a valuable asset to any team."
+            />
+          </div>
+          <div>
             <Testamonials
               name="Tony Huang | Java Developer at ZE PowerGroup"
               quote="Wasi is a great team player who gets along well with everyone, which creates a positive work environment. He asks insightful questions that demonstrate his commitment to fully understanding projects and contributing effectively. Wasi's proactive approach and strong interpersonal skills make him a valuable asset to any team."

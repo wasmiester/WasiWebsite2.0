@@ -5,6 +5,29 @@ import linkedInLogo from "../../public/linkedin-svgrepo-com.svg";
 import emailLogo from "../../public/email-1-svgrepo-com.svg";
 import resumeLogo from "../../public/page-document-my-page-empty-page-svgrepo-com.svg";
 import downArrow from "../../public/arrow-down-circle-svgrepo-com.svg";
+import comma from "../../public/raphael--quote.svg";
+
+function Testamonials({ name, quote }: { name: string; quote: string }) {
+  return (
+    <div>
+      <div className={mystyles.quoteContainerText}>
+        <Image
+          priority
+          src={comma}
+          alt=""
+          height={40}
+          width={40}
+          className={mystyles.testimonialImg}
+        />
+        <div className="pl-4 pr-4 pd-5">
+          {quote}
+          <br />
+          <div className="text-right p-3">{name}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function Exp({
   title,
@@ -122,17 +145,29 @@ export default function Home() {
           </div>
         </div>
         <div>
+          <div className="text-5xl m-5">Testamonials</div>
+          <Testamonials
+            name="Tony Huang | Java Developer at ZE PowerGroup"
+            quote="Wasi is a great team player who gets along well with everyone, which creates a positive work environment. He asks insightful questions that demonstrate his commitment to fully understanding projects and contributing effectively. Wasi's proactive approach and strong interpersonal skills make him a valuable asset to any team."
+          />
+          <div className="flex flex-row-reverse">
+            <Testamonials
+              name="Tony Huang | Java Developer at ZE PowerGroup"
+              quote="Wasi is a great team player who gets along well with everyone, which creates a positive work environment. He asks insightful questions that demonstrate his commitment to fully understanding projects and contributing effectively. Wasi's proactive approach and strong interpersonal skills make him a valuable asset to any team."
+            />
+          </div>
+        </div>
+        <div>
           <div className="text-5xl m-5">Experience</div>
           <Exp
-            title="Freelance Developer"
-            company="Self-Employed"
+            title="Full Stack Developer"
+            company="Tri-Continental Global Services"
             timePeriod="April 2024 – Present"
             BulletPoints={[
-              "Designed, developed and documented a React web application using Tailwind and AWS EC2",
-              "Automated sales tasks for small business by using Salesforce, leading to doubling sales in mere weeks",
-              "Enhanced application security by removing redundant database logic and adding 2FA",
-              "Led coding workshops and system design training, helping 50+ aspiring developers transition into tech roles.",
-              "Tech: Python, React (ReactJS), Tailwind CSS, Node.js, AWS, MSSQL, Salesforce, Docker, GitHub, Postman",
+              "Built and documented a Next.js web app for potential clients, decreasing onboarding time by 60%",
+              "Deployed and optimized AWS EC2 instances to securely host web application and process sensitive forms, reducing the need for manual processing by 80%",
+              "Enhanced application security by updating outdated database logic and adding 2FA",
+              "Tech: Python, React (ReactJS), Tailwind, Node.js, AWS, MSSQL, GitHub, Postman",
             ]}
           />
 

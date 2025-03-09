@@ -171,13 +171,12 @@
   }
 }
 
-
 @mixin btn-border-slide($color, $hoverColor, $borderWidth, $time) {
   $easing: cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 0.75rem;
   position: relative;
   padding: 0.5em 0.5em;
-  margin: 25;
+  margin: 1%;
 
   cursor: pointer;
   overflow: hidden;
@@ -203,18 +202,14 @@
   }
 
   &:hover {
-
-    &>* {
-
-      &>* {
-
+    & > * {
+      & > * {
         &:before,
         &:after {
           transform: translate3d(0, 0, 0);
         }
 
-        &>* {
-
+        & > * {
           &:before,
           &:after {
             transform: translate3d(0, 0, 0);
@@ -224,8 +219,7 @@
     }
   }
 
-  &>* {
-
+  & > * {
     &:before,
     &:after {
       content: "";
@@ -246,8 +240,7 @@
       right: 0;
     }
 
-    &>* {
-
+    & > * {
       &:before,
       &:after {
         content: "";
@@ -275,8 +268,7 @@
         transition: transform $time $easing;
       }
 
-      &>* {
-
+      & > * {
         &:before,
         &:after {
           content: "";
@@ -312,8 +304,8 @@
   @include btn-border-slide(#4b4b4b, white, 3px, 1s);
 }
 
-.scrollArrow{
-position: absolute;
+.scrollArrow {
+  position: absolute;
   left: 50%;
   bottom: 1.25rem;
   /* Equivalent to Tailwind's bottom-5 (5 * 0.25rem) */
@@ -330,3 +322,20 @@ position: absolute;
     opacity: 0%;
   }
 }
+
+
+.quoteContainerText {
+    color: white;
+    border: 2px solid white;
+    width: 50%;
+    margin: 2em;
+    border-radius: 28px;
+    align-items: end;
+}
+
+.testimonialImg {
+    position: relative;
+    left: -1em;
+    top: -1em;
+}
+

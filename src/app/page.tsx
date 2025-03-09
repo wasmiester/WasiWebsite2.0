@@ -9,8 +9,8 @@ import comma from "../../public/raphael--quote.svg";
 
 function Testamonials({ name, quote }: { name: string; quote: string }) {
   return (
-    <div>
-      <div className={mystyles.quoteContainerText}>
+    <div className={mystyles.zigzag}>
+      <div className={mystyles.quoteBox}>
         <Image
           priority
           src={comma}
@@ -19,7 +19,7 @@ function Testamonials({ name, quote }: { name: string; quote: string }) {
           width={40}
           className={mystyles.testimonialImg}
         />
-        <div className="pl-4 pr-4 pd-5">
+        <div className="pl-2 pr-2 pd-5">
           {quote}
           <br />
           <div className="text-right p-3">{name}</div>
@@ -144,20 +144,20 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className={mystyles.testamonialContainers}>
-          <div className="text-5xl m-5">Testamonials</div>
-          <div>
-            <Testamonials
-              name="Tony Huang | Java Developer at ZE PowerGroup"
-              quote="Wasi is a great team player who gets along well with everyone, which creates a positive work environment. He asks insightful questions that demonstrate his commitment to fully understanding projects and contributing effectively. Wasi's proactive approach and strong interpersonal skills make him a valuable asset to any team."
-            />
-          </div>
-          <div>
-            <Testamonials
-              name="Tony Huang | Java Developer at ZE PowerGroup"
-              quote="Wasi is a great team player who gets along well with everyone, which creates a positive work environment. He asks insightful questions that demonstrate his commitment to fully understanding projects and contributing effectively. Wasi's proactive approach and strong interpersonal skills make him a valuable asset to any team."
-            />
-          </div>
+        <div className="text-5xl m-5">Testamonials</div>
+        <div className="flex-col w-full">
+          <Testamonials
+            name="Tony Huang | Java Developer at ZE PowerGroup"
+            quote="Wasi is a great team player who gets along well with everyone, which creates a positive work environment. He asks insightful questions that demonstrate his commitment to fully understanding projects and contributing effectively. Wasi's proactive approach and strong interpersonal skills make him a valuable asset to any team."
+          />
+          <Testamonials
+            name="Benjamin Tisserand | Agile Developer II at SAP"
+            quote="Wasi is an exceptional developer and teammate who quickly adapted to challenging situations, demonstrating strong skills and a proactive learning attitude. His collaborative problem-solving approach not only accelerated solutions but also fostered mutual learning. Over time, he showed significant growth, taking on increasingly complex tasks independently. His professionalism, teamwork, and respect for others made a lasting impact, and he would be a valued addition to any team."
+          />
+          <Testamonials
+            name="Janine Hirtz | Senior Educational Consultant at UBCO"
+            quote="Wasi is very helpful and courteous with instructors, students and CTL staff and does well to work with the many personality types and expectations in a multitude of scenarios and contexts that arise. His technical knowledge and ability to problem solve are an important asset to the success of the online synchronous sessions. Wasi is customer service oriented, a good team player and has a calm demeanor. Wasi has been a valued member of the support team for the MSN program."
+          />
         </div>
         <div>
           <div className="text-5xl m-5">Experience</div>

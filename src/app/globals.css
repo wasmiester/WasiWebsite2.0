@@ -23,7 +23,6 @@
 
 body {
   display: flex;
-  place-content: center;
   place-items: flex-start center;
   background: var(--background);
 }

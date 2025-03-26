@@ -142,8 +142,8 @@ export default function Home() {
             </div>
 
             <div className="text-sm sm:text-[1.25em] m-auto">
-              | Full Stack Developer | Bachelor's in Computer Science | 3+ years
-              of experience |
+              | Full Stack Developer | Bachelor&apos;s in Computer Science | 3+
+              years of experience |
               <br />
             </div>
 

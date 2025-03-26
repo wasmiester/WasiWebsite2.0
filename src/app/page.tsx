@@ -141,13 +141,15 @@ export default function Home() {
               <br />
             </div>
 
-            <div className="text-sm sm:text-[1.25em] m-auto">
+            <div className="sm:text-[1.25em]">
+              <br />
               | Full Stack Developer | Bachelor&apos;s in Computer Science | 3+
               years of experience |
               <br />
+              <br />
             </div>
 
-            <div className={`${mystyles.contactRow} gap-4 sm:gap-8vw`}>
+            <div className={mystyles.contactRow}>
               <ContactBox
                 link={"https://github.com/wasmiester"}
                 src={gitHubLogo}

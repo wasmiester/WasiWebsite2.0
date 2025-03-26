@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 :root {
   font-family: "JetBrains Mono";
   --stripe-color: #070918;
@@ -23,12 +22,8 @@
 }
 
 body {
-  width: 100cqw;
-  min-height: 100cqh;
   display: flex;
   place-content: center;
   place-items: flex-start center;
   background: var(--background);
-    overflow-x: hidden;
-
 }

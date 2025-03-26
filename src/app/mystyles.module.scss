@@ -1,34 +1,33 @@
 .Mpage {
-  display: grid;
-  grid-template-rows: 100vh auto;
-  /* Keep this if you need the second row for "Experience" */
+  inset: 0;
+  width: 90%;
+  height: 100vh;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  flex-flow: column;
+  gap: 4.5%;
+  mix-blend-mode: difference;
 }
 
 .centerPage {
   align-self: center;
   justify-self: center;
   text-align: center;
-  /* Ensure text content is centered */
-}
-
-.name {
-  font-family: "Kdam Thmor", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 6em;
-  /* Base font size */
-  letter-spacing: 0.07em;
-  line-height: 1em;
-  color: #ffffff;
 }
 
 .contactRow {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 8vw;
-  padding-top: 1em;
+  gap: 4vw;
+  padding-top: 0 1em;
+  box-sizing: border-box;
 }
 
 .contactBox {
@@ -36,272 +35,34 @@
   width: 70px;
   height: 70px;
   display: grid;
+  border-radius: 100px;
   place-content: center;
-  border-radius: 12px;
   position: relative;
   overflow: hidden;
   transition: box-shadow 0.3s ease;
   /* Smooth transition for the glow */
 }
 
+@keyframes shadowRotateAnticlockwise {
+  0% {
+    box-shadow: inset 0 1px 0 #fff; /* top */
+  }
+
+  50% {
+    box-shadow: inset -1px 0 0 #fff, inset 0 -1px 0 #fff; /* left + bottom */
+  }
+
+  75% {
+    box-shadow: inset 0 -1px 0 #fff, inset 1px 0 0 #fff; /* bottom + right */
+  }
+
+  100% {
+    box-shadow: inset 1px 0 0 #fff, inset 0 1px 0 #fff; /* right + top again */
+  }
+}
+
 .contactBox:hover {
-  animation: contactBoxGlow 6s linear infinite;
-}
-
-@keyframes contactBoxGlow {
-  0% {
-    box-shadow: 0 -15px 35px rgba(20, 232, 30, 0.8),
-      /* Top: #14e81e */ 0 15px 35px rgba(0, 234, 141, 0.8),
-      /* Bottom: #00ea8d */ -15px 0 35px rgba(1, 126, 213, 0.8),
-      /* Left: #017ed5 */ 15px 0 35px rgba(181, 61, 255, 0.8),
-      /* Right: #b53dff */ -11.25px -11.25px 35px rgba(141, 0, 196, 0.8),
-      /* Top-left: #8d00c4 */ 11.25px -11.25px 35px rgba(20, 232, 30, 0.8),
-      /* Top-right: #14e81e */ -11.25px 11.25px 35px rgba(0, 234, 141, 0.8),
-      /* Bottom-left: #00ea8d */ 11.25px 11.25px 35px rgba(1, 126, 213, 0.8);
-    /* Bottom-right: #017ed5 */
-  }
-
-  25% {
-    box-shadow: 15px 0 35px rgba(20, 232, 30, 0.8),
-      /* Right: #14e81e */ -15px 0 35px rgba(0, 234, 141, 0.8),
-      /* Left: #00ea8d */ 0 -15px 35px rgba(1, 126, 213, 0.8),
-      /* Top: #017ed5 */ 0 15px 35px rgba(181, 61, 255, 0.8),
-      /* Bottom: #b53dff */ 11.25px 11.25px 35px rgba(141, 0, 196, 0.8),
-      /* Bottom-right: #8d00c4 */ -11.25px 11.25px 35px rgba(20, 232, 30, 0.8),
-      /* Bottom-left: #14e81e */ 11.25px -11.25px 35px rgba(0, 234, 141, 0.8),
-      /* Top-right: #00ea8d */ -11.25px -11.25px 35px rgba(1, 126, 213, 0.8);
-    /* Top-left: #017ed5 */
-  }
-
-  50% {
-    box-shadow: 0 15px 35px rgba(20, 232, 30, 0.8),
-      /* Bottom: #14e81e */ 0 -15px 35px rgba(0, 234, 141, 0.8),
-      /* Top: #00ea8d */ 15px 0 35px rgba(1, 126, 213, 0.8),
-      /* Right: #017ed5 */ -15px 0 35px rgba(181, 61, 255, 0.8),
-      /* Left: #b53dff */ 11.25px -11.25px 35px rgba(141, 0, 196, 0.8),
-      /* Top-right: #8d00c4 */ -11.25px -11.25px 35px rgba(20, 232, 30, 0.8),
-      /* Top-left: #14e81e */ 11.25px 11.25px 35px rgba(0, 234, 141, 0.8),
-      /* Bottom-right: #00ea8d */ -11.25px 11.25px 35px rgba(1, 126, 213, 0.8);
-    /* Bottom-left: #017ed5 */
-  }
-
-  75% {
-    box-shadow: -15px 0 35px rgba(20, 232, 30, 0.8),
-      /* Left: #14e81e */ 15px 0 35px rgba(0, 234, 141, 0.8),
-      /* Right: #00ea8d */ 0 15px 35px rgba(1, 126, 213, 0.8),
-      /* Bottom: #017ed5 */ 0 -15px 35px rgba(181, 61, 255, 0.8),
-      /* Top: #b53dff */ -11.25px 11.25px 35px rgba(141, 0, 196, 0.8),
-      /* Bottom-left: #8d00c4 */ 11.25px 11.25px 35px rgba(20, 232, 30, 0.8),
-      /* Bottom-right: #14e81e */ -11.25px -11.25px 35px rgba(0, 234, 141, 0.8),
-      /* Top-left: #00ea8d */ 11.25px -11.25px 35px rgba(1, 126, 213, 0.8);
-    /* Top-right: #017ed5 */
-  }
-
-  100% {
-    box-shadow: 0 -15px 35px rgba(20, 232, 30, 0.8),
-      /* Top: #14e81e */ 0 15px 35px rgba(0, 234, 141, 0.8),
-      /* Bottom: #00ea8d */ -15px 0 35px rgba(1, 126, 213, 0.8),
-      /* Left: #017ed5 */ 15px 0 35px rgba(181, 61, 255, 0.8),
-      /* Right: #b53dff */ -11.25px -11.25px 35px rgba(141, 0, 196, 0.8),
-      /* Top-left: #8d00c4 */ 11.25px -11.25px 35px rgba(20, 232, 30, 0.8),
-      /* Top-right: #14e81e */ -11.25px 11.25px 35px rgba(0, 234, 141, 0.8),
-      /* Bottom-left: #00ea8d */ 11.25px 11.25px 35px rgba(1, 126, 213, 0.8);
-    /* Bottom-right: #017ed5 */
-  }
-}
-
-.orbText {
-  animation: rotateGlow 3s linear infinite;
-}
-
-@keyframes rotateGlow {
-  0% {
-    text-shadow: 3px 0 2px rgba(255, 0, 0, 0.8),
-      /* Right: Red */ -3px 0 2px rgba(0, 255, 0, 0.8),
-      /* Left: Green */ 0 3px 2px rgba(0, 0, 255, 0.8),
-      /* Bottom: Blue */ 0 -3px 2px rgba(255, 255, 0, 0.8),
-      /* Top: Yellow */ 3px 3px 2px rgba(255, 0, 255, 0.8),
-      /* Bottom-right: Magenta */ -3px -3px 2px rgba(0, 255, 255, 0.8),
-      /* Top-left: Cyan */ 3px -3px 2px rgba(255, 165, 0, 0.8);
-    /* Top-right: Orange */
-  }
-
-  25% {
-    text-shadow: 0 3px 2px rgba(255, 0, 0, 0.8),
-      /* Bottom: Red */ 0 -3px 2px rgba(0, 255, 0, 0.8),
-      /* Top: Green */ -3px 0 2px rgba(0, 0, 255, 0.8),
-      /* Left: Blue */ 3px 0 2px rgba(255, 255, 0, 0.8),
-      /* Right: Yellow */ -3px 3px 2px rgba(255, 0, 255, 0.8),
-      /* Bottom-left: Magenta */ 3px -3px 2px rgba(0, 255, 255, 0.8),
-      /* Top-right: Cyan */ -3px -3px 2px rgba(255, 165, 0, 0.8);
-    /* Top-left: Orange */
-  }
-
-  50% {
-    text-shadow: -3px 0 2px rgba(255, 0, 0, 0.8),
-      /* Left: Red */ 3px 0 2px rgba(0, 255, 0, 0.8),
-      /* Right: Green */ 0 -3px 2px rgba(0, 0, 255, 0.8),
-      /* Top: Blue */ 0 3px 2px rgba(255, 255, 0, 0.8),
-      /* Bottom: Yellow */ -3px -3px 2px rgba(255, 0, 255, 0.8),
-      /* Top-left: Magenta */ 3px 3px 2px rgba(0, 255, 255, 0.8),
-      /* Bottom-right: Cyan */ 3px -3px 2px rgba(255, 165, 0, 0.8);
-    /* Top-right: Orange */
-  }
-
-  75% {
-    text-shadow: 0 -3px 2px rgba(255, 0, 0, 0.8),
-      /* Top: Red */ 0 3px 2px rgba(0, 255, 0, 0.8),
-      /* Bottom: Green */ 3px 0 2px rgba(0, 0, 255, 0.8),
-      /* Right: Blue */ -3px 0 2px rgba(255, 255, 0, 0.8),
-      /* Left: Yellow */ 3px -3px 2px rgba(255, 0, 255, 0.8),
-      /* Top-right: Magenta */ -3px 3px 2px rgba(0, 255, 255, 0.8),
-      /* Bottom-left: Cyan */ -3px -3px 2px rgba(255, 165, 0, 0.8);
-    /* Top-left: Orange */
-  }
-
-  100% {
-    text-shadow: 3px 0 2px rgba(255, 0, 0, 0.8),
-      /* Right: Red */ -3px 0 2px rgba(0, 255, 0, 0.8),
-      /* Left: Green */ 0 3px 2px rgba(0, 0, 255, 0.8),
-      /* Bottom: Blue */ 0 -3px 2px rgba(255, 255, 0, 0.8),
-      /* Top: Yellow */ 3px 3px 2px rgba(255, 0, 255, 0.8),
-      /* Bottom-right: Magenta */ -3px -3px 2px rgba(0, 255, 255, 0.8),
-      /* Top-left: Cyan */ 3px -3px 2px rgba(255, 165, 0, 0.8);
-    /* Top-right: Orange */
-  }
-}
-
-@mixin btn-border-slide($color, $hoverColor, $borderWidth, $time) {
-  $easing: cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 0.75rem;
-  position: relative;
-  padding: 0.5em 0.5em;
-  margin: 1%;
-
-  cursor: pointer;
-  overflow: hidden;
-
-  &:before,
-  &:after {
-    content: "";
-    position: absolute;
-    left: 0;
-
-    height: $borderWidth;
-    width: 100%;
-
-    background-color: $color;
-  }
-
-  &:before {
-    top: 0;
-  }
-
-  &:after {
-    bottom: 0;
-  }
-
-  &:hover {
-    & > * {
-      & > * {
-        &:before,
-        &:after {
-          transform: translate3d(0, 0, 0);
-        }
-
-        & > * {
-          &:before,
-          &:after {
-            transform: translate3d(0, 0, 0);
-          }
-        }
-      }
-    }
-  }
-
-  & > * {
-    &:before,
-    &:after {
-      content: "";
-      position: absolute;
-      top: 0;
-
-      height: 100%;
-      width: $borderWidth;
-
-      background-color: $color;
-    }
-
-    &:before {
-      left: 0;
-    }
-
-    &:after {
-      right: 0;
-    }
-
-    & > * {
-      &:before,
-      &:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        z-index: 9;
-
-        height: $borderWidth;
-        width: 100%;
-
-        background-color: $hoverColor;
-      }
-
-      &:before {
-        top: 0;
-
-        transform: translate3d(-105%, 0, 0);
-        transition: transform $time $easing;
-      }
-
-      &:after {
-        bottom: 0;
-
-        transform: translate3d(105%, 0, 0);
-        transition: transform $time $easing;
-      }
-
-      & > * {
-        &:before,
-        &:after {
-          content: "";
-          position: absolute;
-          top: 0;
-          z-index: 9;
-
-          height: 100%;
-          width: $borderWidth;
-
-          background-color: $hoverColor;
-        }
-
-        &:before {
-          left: 0;
-
-          transform: translate3d(0, 105%, 0);
-          transition: transform $time $easing;
-        }
-
-        &:after {
-          right: 0;
-
-          transform: translate3d(0, -105%, 0);
-          transition: transform $time $easing;
-        }
-      }
-    }
-  }
-}
-
-.box {
-  @include btn-border-slide(#4b4b4b, white, 3px, 1s);
+  animation: shadowRotateAnticlockwise 1s linear infinite;
 }
 
 .scrollArrow {
@@ -323,28 +84,366 @@
   }
 }
 
-.zigzag {
-  display: flex;
-  width: 100%;
-}
-
-.zigzag:nth-child(odd) {
-  justify-content: flex-start;
-}
-
-.zigzag:nth-child(even) {
-  justify-content: flex-end;
-}
-
 .quoteBox {
   width: 50%;
   padding: 5px;
   border-radius: 50px;
-  border:3px solid #ffffff;
+  border: 3px solid #ffffff;
 }
 
-.testimonialImg{
-  top:-1em;
-  left: -1em;
+.wrapper {
+  width: 100%;
+  height: auto;
   position: relative;
+  overflow-x: hidden; // Prevent horizontal scrolling
+  box-sizing: border-box;
+}
+
+@keyframes blink-animation {
+  0%,
+  100% {
+    opacity: var(--blink-opacity, 1);
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.RainbowBanner {
+  width: 100%;
+  height: 20%;
+  min-height: 20vh;
+  position: absolute;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  align-self: center;
+  --stripes: repeating-linear-gradient(
+    100deg,
+    var(--stripe-color) 0%,
+    var(--stripe-color) 7%,
+    transparent 10%,
+    transparent 12%,
+    var(--stripe-color) 16%
+  );
+
+  --rainbow: repeating-linear-gradient(
+    100deg,
+    #60a5fa 10%,
+    #e879f9 15%,
+    #60a5fa 20%,
+    #5eead4 25%,
+    #60a5fa 30%
+  );
+  background-image: var(--stripes), var(--rainbow);
+  background-size: 300%, 200%;
+  background-position: 50% 50%, 50% 50%;
+
+  filter: blur(50px) opacity(50%) saturate(500%);
+
+  mask-image: line-gradient(180deg, #070918 40%, transparent 0%);
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--stripes), var(--rainbow);
+    background-size: 200%, 100%;
+    animation: smoothBg 60s linear infinite;
+    background-attachment: fixed;
+    mix-blend-mode: difference;
+  }
+}
+
+@keyframes smoothBg {
+  from {
+    background-position: 50% 50%, 50% 50%;
+  }
+  to {
+    background-position: 350% 50%, 350% 50%;
+  }
+}
+
+.TestamonialCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.TestamonialCont .TestamonialBox {
+  position: relative;
+  width: 80%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 10px;
+  transition: 0.5s;
+}
+
+.TestamonialCont .TestamonialBox::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 50px;
+  width: 50%;
+  height: 100%;
+  text-decoration: none;
+  background: #fff;
+  border-radius: 8px;
+  transform: skewX(15deg);
+  transition: 0.5s;
+}
+
+.TestamonialCont .TestamonialBox::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50;
+  width: 50%;
+  height: 100%;
+  background: #fff;
+  border-radius: 8px;
+  transform: skewX(15deg);
+  transition: 0.5s;
+  filter: blur(5px);
+}
+
+.TestamonialCont .TestamonialBox:hover:before,
+.TestamonialCont .TestamonialBox:hover:after {
+  transform: skewX(0deg);
+  left: 20px;
+  width: calc(100% - 5px);
+}
+
+.TestamonialCont .TestamonialBox:nth-child(1):before,
+.TestamonialCont .TestamonialBox:nth-child(1):after {
+  background: linear-gradient(315deg, #ffbc00, #ff0058);
+}
+
+.TestamonialCont .TestamonialBox:nth-child(2):before,
+.TestamonialCont .TestamonialBox:nth-child(2):after {
+  background: linear-gradient(315deg, #03a9f4, #ff0058);
+}
+
+.TestamonialCont .TestamonialBox:nth-child(3):before,
+.TestamonialCont .TestamonialBox:nth-child(3):after {
+  background: linear-gradient(315deg, #4dff03, #00d0ff);
+}
+
+.TestamonialCont .TestamonialBox span {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -5;
+  pointer-events: none;
+}
+
+.TestamonialCont .TestamonialBox span::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: 0.1s;
+  animation: animateSpanBox 2s ease-in-out infinite;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.TestamonialCont .TestamonialBox:hover span::before {
+  top: -50px;
+  left: 50px;
+  width: 100px;
+  height: 100px;
+  opacity: 1;
+}
+
+.TestamonialCont .TestamonialBox span::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: 0.5s;
+  animation: animateSpanBox 2s ease-in-out infinite;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  animation-delay: -1s;
+}
+
+.TestamonialCont .TestamonialBox:hover span:after {
+  bottom: -50px;
+  right: 50px;
+  width: 100px;
+  height: 100px;
+  opacity: 1;
+}
+
+@keyframes animateSpanBox {
+  0%,
+  100% {
+    transform: translateY(10px);
+  }
+
+  50% {
+    transform: translate(-10px);
+  }
+}
+
+.TestamonialCont .TestamonialBox .TestamonialContent {
+  position: relative;
+  left: 0;
+  padding: 20px 40px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 1;
+  transform: 0.5s;
+  color: #fff;
+}
+
+.TestamonialCont .TestamonialBox:hover .projectContent {
+  left: -25px;
+}
+
+.TestamonialCont .TestamonialBox .TestamonialContent p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  line-height: 1.4em;
+}
+
+.TestamonialCont .TestamonialBox .TestamonialContent a:hover {
+  background: #ffcf4d;
+  border: 1px solid rgba(255, 0, 88, 0.4);
+  box-shadow: 0 1px 15px rgba(1, 1, 1, 0.2);
+}
+
+.ExpCard {
+  width: 90%;
+  background-color: #011522;
+  border-radius: 8px;
+  margin: 10px;
+  padding: 1px;
+  align-self: center;
+  justify-self: center;
+}
+
+.divWindowTools {
+  display: flex;
+  align-items: center;
+  padding: 9px;
+}
+
+.toolsCircle {
+  padding: 0 9px;
+}
+
+.redBox {
+  display: inline-block;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ff605c;
+}
+
+.yellowBox {
+  display: inline-block;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ffbd44;
+}
+
+.greenBox {
+  display: inline-block;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #00ca4e;
+}
+
+.projectContainer {
+  margin: 80px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+
+.projectContainer .projectCard {
+  position: relative;
+  margin: 30px;
+}
+
+.projectContainer .projectCard .face {
+  width: 300px;
+  height: 195px;
+  transition: 0.4s;
+}
+
+.projectContainer .projectCard .face.face1 {
+  position: relative;
+  background: #333;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  z-index: 1;
+  transform: translateY(100px);
+  border-radius: 8px;
+
+}
+
+.projectContainer .projectCard:hover .face.face1 {
+  transform: translateY(0);
+  box-shadow: inset 0 0 60px whitesmoke, inset 20px 0 80px #f0f,
+    inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff,
+    0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
+}
+
+.projectContainer .projectCard .face.face1 .projectContent {
+  transition: 0.5s;
+  text-align: center;
+}
+
+
+.projectContainer .projectCard .face.face2 {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  transform: translateY(-100px);
+}
+
+.projectContainer .projectCard:hover .face.face2 {
+  transform: translateY(0);
 }

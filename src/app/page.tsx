@@ -196,9 +196,7 @@ export default function Home() {
         />
 
         <Projects
-          link={
-            "https://github.com/UBCO-COSC-499-Summer-2022/api-development-and-testing-project1-helpya-services-inc/tree/master"
-          }
+          link={"https://github.com/wasmiester/Family-Schedule"}
           src={FamilySchedule.src}
           alt="https://github.com/wasmiester/Family-Schedule/tree/main"
           description="Family Schedule App built in Android Studio using Java and XML. The app

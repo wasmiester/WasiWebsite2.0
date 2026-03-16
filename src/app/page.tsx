@@ -216,21 +216,18 @@ export default function Home() {
       <div className="text-5xl m-5">Projects</div>
       <div className={mystyles.projectContainer}>
         <Projects
-          link="https://github.com/wasmiester/CapsuleGuard_AI"
           repoName="CapsuleGuard_AI"
           imgName={capsuleGaurd.src}
           owner="wasmiester"
         />
 
         <Projects
-          link="https://github.com/wasmiester/event-ingestion-platform"
           repoName="AI-Incident-Analysis-Engine"
           imgName={AIIAE.src}
           owner="wasmiester"
         />
 
         <Projects
-          link="https://github.com/wasmiester/event-ingestion-platform"
           repoName="event-ingestion-platform"
           imgName={apiProject.src}
           owner="wasmiester"

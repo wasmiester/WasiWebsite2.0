@@ -5,44 +5,81 @@ import gitHubLogo from "../../public/github-142-svgrepo-com.svg";
 import linkedInLogo from "../../public/linkedin-svgrepo-com.svg";
 import emailLogo from "../../public/email-1-svgrepo-com.svg";
 import resumeLogo from "../../public/page-document-my-page-empty-page-svgrepo-com.svg";
-import SkyTrainProject from "../../public/SkyTrainTracker.png";
 import apiProject from "../../public/apiProject.png";
-import FamilySchedule from "../../public/FamilySchedule.png";
+import capsuleGaurd from "../../public/capsule capture.png"
+import AIIAE from "../../public/Gemini_Generated_Image_8ql7u08ql7u08ql7.png"
+import { GoRepo } from "react-icons/go";
 
-function Projects({
-  link,
-  src,
-  alt,
+export function RepoCard({
+  repoName,
   description,
+  topics,
+  customPic,
 }: {
-  link: string;
-  src: string;
-  alt: string;
-  description: string;
+  repoName: string;
+  description: string | null;
+  topics: string[];
+  customPic: string;
 }) {
   return (
-    <a href={link} target="_blank" rel="noopener noreferrer">
-      <div className={mystyles.projectCard}>
-        <div className={`${mystyles.face} ${mystyles.face1}`}>
-          <div className={mystyles.projectContent}>
-            <Image
-              priority
-              src={src}
-              alt={alt}
-              height={900}
-              width={900}
-              className="rounded-sm "
-            />
-          </div>
-        </div>
-        <div className={`${mystyles.face} ${mystyles.face2}`}>
-          <div className={mystyles.projectContent}>
-            <p>
-             {description}
-            </p>
-          </div>
-        </div>
+    <div className={mystyles.customRepoCard}>
+      <div className={mystyles.cardHeader}>
+        {/* Use the Repo Icon here */}
+        <GoRepo className={mystyles.bookIcon} />
+
+        <h3 className={mystyles.repoTitle}>
+          {repoName}
+        </h3>
       </div>
+
+      {/* Your custom project image below the header */}
+      <img
+        src={customPic}
+        className={mystyles.projectPic}
+        alt="Project Preview"
+      />
+
+      <p className={mystyles.repoDescription}>{description}</p>
+
+      <div className={mystyles.topicsContainer}>
+        {topics?.map((topic: string) => (
+          <span key={topic}>{topic}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+async function Projects({
+  repoName,
+  imgName,
+  owner,
+}: {
+  repoName: string;
+  imgName: string;
+  owner: string;
+}) {
+  const response = await fetch(
+    `https://api.github.com/repos/${owner}/${repoName}`,
+    {
+      next: { revalidate: 3600 },
+    },
+  );
+  interface GitHubRepo {
+    name: string;
+    description: string | null;
+    topics: string[];
+    html_url: string;
+  }
+  const repoData: GitHubRepo = await response.json();
+  return (
+    <a href={`https://github.com/wasmiester/${repoName}`} target="_blank" rel="noopener noreferrer">
+        <RepoCard
+          repoName={repoData.name}
+          description={repoData.description}
+          topics={repoData.topics}
+          customPic={imgName}
+        />
     </a>
   );
 }
@@ -179,28 +216,24 @@ export default function Home() {
       <div className="text-5xl m-5">Projects</div>
       <div className={mystyles.projectContainer}>
         <Projects
-          link={"https://github.com/wasmiester/Skytrain-app/tree/main"}
-          src={SkyTrainProject.src}
-          alt="SkyTrain Project"
-          description="Skytrain App built in Android Studio using Java and XML. The app
-              uses Translink's API to get real-time data on Skytrain schedules"
-        />
-        <Projects
-          link={
-            "https://github.com/UBCO-COSC-499-Summer-2022/api-development-and-testing-project1-helpya-services-inc/tree/master"
-          }
-          src={apiProject.src}
-          alt="API Project"
-          description="API built in JavaScript and tested using Docker. The API
-              is used for as a backend for an upcoing blue collar service acquisition app"
+          link="https://github.com/wasmiester/CapsuleGuard_AI"
+          repoName="CapsuleGuard_AI"
+          imgName={capsuleGaurd.src}
+          owner="wasmiester"
         />
 
         <Projects
-          link={"https://github.com/wasmiester/Family-Schedule"}
-          src={FamilySchedule.src}
-          alt="https://github.com/wasmiester/Family-Schedule/tree/main"
-          description="Family Schedule App built in Android Studio using Java and XML. The app
-          allows users to create, edit, and delete events on a shared calendar"
+          link="https://github.com/wasmiester/event-ingestion-platform"
+          repoName="AI-Incident-Analysis-Engine"
+          imgName={AIIAE.src}
+          owner="wasmiester"
+        />
+
+        <Projects
+          link="https://github.com/wasmiester/event-ingestion-platform"
+          repoName="event-ingestion-platform"
+          imgName={apiProject.src}
+          owner="wasmiester"
         />
       </div>
       <div className="text-5xl m-5">Testamonials</div>

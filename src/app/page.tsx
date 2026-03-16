@@ -10,7 +10,7 @@ import capsuleGaurd from "../../public/capsule capture.png"
 import AIIAE from "../../public/Gemini_Generated_Image_8ql7u08ql7u08ql7.png"
 import { GoRepo } from "react-icons/go";
 
-export function RepoCard({
+function RepoCard({
   repoName,
   description,
   topics,

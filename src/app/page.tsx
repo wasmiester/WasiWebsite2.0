@@ -24,7 +24,6 @@ function RepoCard({
   return (
     <div className={mystyles.customRepoCard}>
       <div className={mystyles.cardHeader}>
-        {/* Use the Repo Icon here */}
         <GoRepo className={mystyles.bookIcon} />
 
         <h3 className={mystyles.repoTitle}>
@@ -32,8 +31,7 @@ function RepoCard({
         </h3>
       </div>
 
-      {/* Your custom project image below the header */}
-      <img
+      <Image
         src={customPic}
         className={mystyles.projectPic}
         alt="Project Preview"

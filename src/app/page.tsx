@@ -220,13 +220,13 @@ export default function Home() {
         />
 
         <Projects
-          repoName="AI Incident Analysis Engine"
+          repoName="AI-Incident-Analysis-Engine"
           imgName={aiiae.src}
           owner="wasmiester"
         />
 
         <Projects
-          repoName="event-ingestion-platform"
+          repoName="Event-Ingestion-platform"
           imgName={apiProject.src}
           owner="wasmiester"
         />

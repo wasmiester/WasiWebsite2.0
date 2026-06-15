@@ -7,7 +7,7 @@ import emailLogo from "../../public/email-1-svgrepo-com.svg";
 import resumeLogo from "../../public/page-document-my-page-empty-page-svgrepo-com.svg";
 import apiProject from "../../public/apiProject.png";
 import capsuleGaurd from "../../public/capsule capture.png"
-import AIIAE from "../../public/Gemini_Generated_Image_8ql7u08ql7u08ql7.png"
+import aiiae from "../../public/Gemini_Generated_Image_8ql7u08ql7u08ql7.png"
 import { GoRepo } from "react-icons/go";
 
 function RepoCard({
@@ -220,8 +220,8 @@ export default function Home() {
         />
 
         <Projects
-          repoName="AI-Incident-Analysis-Engine"
-          imgName={AIIAE.src}
+          repoName="AI Incident Analysis Engine"
+          imgName={aiiae.src}
           owner="wasmiester"
         />
 

@@ -222,11 +222,11 @@ export default function Home() {
         <div className="text-5xl m-5">Experience</div>
         <Exp
           title="Full Stack Developer"
-          company="Tri-Continental Global Services"
+          company="Freelance Contractor"
           timePeriod="April 2024 – Present"
           BulletPoints={[
-            "Built and documented a Next.js web app for potential clients, decreasing onboarding time by 60%",
-            "Deployed and optimized AWS EC2 instances to securely host web application and process sensitive forms, reducing the need for manual processing by 80%",
+            "Built and documented a Next.js web app for potential clients",
+            "Deployed and optimized AWS EC2 instances to securely host client applications, automating manual workflows to reduce processing overhead by 80%",
             "Enhanced application security by updating outdated database logic and adding 2FA",
             "Tech: Python, React (ReactJS), Tailwind, Node.js, AWS, MSSQL, GitHub, Postman",
           ]}

@@ -6,8 +6,8 @@ import linkedInLogo from "../../public/linkedin-svgrepo-com.svg";
 import emailLogo from "../../public/email-1-svgrepo-com.svg";
 import resumeLogo from "../../public/page-document-my-page-empty-page-svgrepo-com.svg";
 import apiProject from "../../public/apiProject.png";
-import capsuleGaurd from "../../public/capsule capture.png"
-import aiiae from "../../public/Gemini_Generated_Image_8ql7u08ql7u08ql7.png"
+import capsuleGaurd from "../../public/capsule capture.png";
+import aiiae from "../../public/Gemini_Generated_Image_8ql7u08ql7u08ql7.png";
 import { GoRepo } from "react-icons/go";
 
 function RepoCard({
@@ -26,9 +26,7 @@ function RepoCard({
       <div className={mystyles.cardHeader}>
         <GoRepo className={mystyles.bookIcon} />
 
-        <h3 className={mystyles.repoTitle}>
-          {repoName}
-        </h3>
+        <h3 className={mystyles.repoTitle}>{repoName}</h3>
       </div>
 
       <Image
@@ -71,13 +69,17 @@ async function Projects({
   }
   const repoData: GitHubRepo = await response.json();
   return (
-    <a href={`https://github.com/wasmiester/${repoName}`} target="_blank" rel="noopener noreferrer">
-        <RepoCard
-          repoName={repoData.name}
-          description={repoData.description}
-          topics={repoData.topics}
-          customPic={imgName}
-        />
+    <a
+      href={`https://github.com/wasmiester/${repoName}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <RepoCard
+        repoName={repoData.name}
+        description={repoData.description}
+        topics={repoData.topics}
+        customPic={imgName}
+      />
     </a>
   );
 }
@@ -178,8 +180,7 @@ export default function Home() {
 
             <div className="sm:text-[1.25em]">
               <br />
-              | Full Stack Developer | Bachelor&apos;s in Computer Science | 3+
-              years of experience |
+              | Full Stack Developer | Bachelor&apos;s in Computer Science |
               <br />
               <br />
             </div>
@@ -249,52 +250,47 @@ export default function Home() {
       <div>
         <div className="text-5xl m-5">Experience</div>
         <Exp
-          title="Full Stack Developer"
-          company="Tri-Continental Global Services"
-          timePeriod="April 2024 – Present"
+          title="Coding Instructor (Part-Time)"
+          company="Impact A&C"
+          timePeriod="April 2024 – June 2025"
           BulletPoints={[
-            "Built and documented a Next.js web app for potential clients, decreasing onboarding time by 60%",
-            "Deployed and optimized AWS EC2 instances to securely host web application and process sensitive forms, reducing the need for manual processing by 80%",
-            "Enhanced application security by updating outdated database logic and adding 2FA",
-            "Tech: Python, React (ReactJS), Tailwind, Node.js, AWS, MSSQL, GitHub, Postman",
+            "Worked part-time as a coding instructor, teaching programming fundamentals to students from Kindergarten through the end of high school, covering Python basics, app development, Scratch, and game modding",
+            "Designed and built independent projects in computer vision and ML-based monitoring, and completed coursework toward the IBM Generative AI Engineering Professional Certificate",
           ]}
         />
 
         <Exp
           title="Software Engineer"
-          company="Zema Global Data Corporation"
+          company="ZE PowerGroup"
           timePeriod="February 2023 – April 2024"
           BulletPoints={[
-            "Improved data processing speed by 65% for millions of CRUD operations per minute on Oracle/SQL databases",
-            "Developed application modules to efficiently perform ETL functions on billions of data entries coming from various sources per day",
-            "Developed automated test tools that improved software quality and reliability, boosting testing efficiency by 95%",
-            "Tech: Java, Spring, SQL, Oracle DB, MSSQL, SVN, Liquibase, Gradle, Jenkins, Batch Scripting, JIRA, IntelliJ, Postman, Elasticsearch",
+            "Maintained and extended a large-scale production database ingesting real-time energy and commodities futures pricing data from a wide range of third-party market data vendors",
+            "Diagnosed and resolved data-parsing failures by updating regex-based parsers whenever upstream vendors changed source formatting, minimizing downtime for downstream pricing systems",
+            "Designed and implemented new database schemas and data-source integrations to onboard new client requirements, managing all work through a Jira-based ticketing workflow",
+            "Built an automated CI/CD test suite that automated 95% of previously manual test cases, reducing testing time and improving defect detection",
+            "Tech: Java, Spring Boot, SQL, Oracle DB, Liquibase, Gradle, Jenkins, Elasticsearch, JIRA",
           ]}
         />
 
         <Exp
-          title="Software Developer Intern"
-          company="Atomic47 Labs Inc."
+          title="Software Engineering Intern"
+          company="Atomic47 Labs"
           timePeriod="January 2021 – April 2021"
           BulletPoints={[
-            "Completed full SDLC for API that managed millions of end-user profiles, reducing missing or corrupt data by 70%",
-            "Implemented new REST API endpoints that would retrieve the end-users' cryptocurrency transaction receipts",
-            "Developed a new sign-in portal using React to save millions of users time by removing three clicks per interaction",
-            "Developed a React dashboard component that dynamically sets the user’s time zone based on their browser",
-            "Automated HTTP API requests using Postman to increase test coverage by 95%",
-            "Tech: React, JS, TS, Nest.js, jQuery, Linux, HTML, CSS, Dart, PHP, SQL, Oracle DB, Docker, MSSQL, Git, JIRA, VS Code, Postman",
+            "Developed, tested, and documented Nest.js API endpoints for end-user profile management and cryptocurrency transaction retrieval",
+            "Redesigned a multi-step sign-in flow into a streamlined React-based portal, consolidating form steps to reduce the number of clicks required to log in",
+            "Tech: Nest.js, React, Postman, REST APIs",
           ]}
         />
 
         <Exp
-          title="Full Stack Web Developer"
-          company=" University of British Columbia"
+          title="Full Stack Developer (Part-Time)"
+          company="University of British Columbia"
           timePeriod="September 2019 – December 2020"
           BulletPoints={[
-            "Designed and developed a scientific research platform system to handle and analyze thousands of clinics and patient data from across Canada",
-            "Significantly improved usability with 98% test coverage and resolving 65 critical quality issues",
-            "Engineered relational databases and data analysis tools using PHP and SQL to examine patient data",
-            "Tech: JS, TS, jQuery, React, HTML, CSS, PHP, SQL, Oracle DB, MSSQL, VS Code, Joomla",
+            "Designed and developed a scientific research platform utilizing React and TypeScript to handle and analyze data from thousands of Canadian clinics",
+            "Completed full SDLC for secure profile management and REST API endpoints, reducing corrupt data entries via field-level input validation and automated data-cleaning scripts",
+            "Tech: React, TypeScript, Nest.js, PHP, SQL, Relational Databases, Docker, Linux, Git",
           ]}
         />
       </div>

@@ -424,7 +424,7 @@ function Projects() {
       <div className={styles.wrap}>
         <h2 className={styles["section-title"]}>Things I&apos;ve shipped</h2>
         <p className={styles["section-lede"]}>
-          Four systems, four different failure modes to design around.
+          Four systems, countless innovations and lessons.
         </p>
         {projects.map((project) => (
           <ProjectCard project={project} key={project.index} />

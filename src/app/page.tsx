@@ -659,7 +659,7 @@ function ContactForm() {
     const accessKey = (
       form.elements.namedItem("access_key") as HTMLInputElement | null
     )?.value;
-    if (!accessKey || accessKey === "YOUR_WEB3FORMS_ACCESS_KEY") {
+    if (!accessKey) {
       setStatus({
         state: "error",
         text: "Form isn't wired up yet — add a Web3Forms access key.",
@@ -705,8 +705,7 @@ function ContactForm() {
       ref={formRef}
       onSubmit={handleSubmit}
     >
-      {/* Get a free access key at web3forms.com (enter your email, no account needed) and paste it below */}
-      <input type="hidden" name="access_key" defaultValue="YOUR_WEB3FORMS_ACCESS_KEY" />
+      <input type="hidden" name="access_key" defaultValue="823d5a8f-cf82-4541-ab50-ad6a2aa75bd9" />
       <input type="hidden" name="subject" defaultValue="New message from wasiraza.com" />
       <input
         type="checkbox"

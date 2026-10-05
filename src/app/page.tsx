@@ -3,12 +3,10 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Image, { type StaticImageData } from "next/image";
 import styles from "./mystyles.module.scss";
+import novaScreenshot from "../../public/arc-max.png";
 import capsuleGuard from "../../public/capsule capture.png";
 import aiiae from "../../public/Gemini_Generated_Image_8ql7u08ql7u08ql7.png";
 import apiProject from "../../public/apiProject.png";
-
-const NOVA_PLACEHOLDER =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%230D1224'/%3E%3Ctext x='400' y='230' font-family='monospace' font-size='18' fill='%238B93A7' text-anchor='middle'%3ENOVA screenshot placeholder%3C/text%3E%3C/svg%3E";
 
 /* ---------- Header ---------- */
 
@@ -270,7 +268,7 @@ type Project = {
   title: string;
   repo: string;
   figCaption: string;
-  image?: StaticImageData;
+  image: StaticImageData;
   alt: string;
   facts: ProjectFact[];
   tags: string[];
@@ -283,7 +281,8 @@ const projects: Project[] = [
     title: "NOVA",
     repo: "https://github.com/wasmiester/NOVA",
     figCaption: "Fig. 01 — NOVA, activity + conversation view",
-    alt: "NOVA desktop assistant screenshot placeholder",
+    image: novaScreenshot,
+    alt: "NOVA desktop assistant screenshot",
     facts: [
       {
         term: "Problem",
@@ -367,12 +366,7 @@ function ProjectCard({ project }: { project: Project }) {
     <div className={styles.project} data-index={project.index}>
       <div className={styles["project-figure"]}>
         <figure>
-          {project.image ? (
-            <Image src={project.image} alt={project.alt} />
-          ) : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={NOVA_PLACEHOLDER} alt={project.alt} />
-          )}
+          <Image src={project.image} alt={project.alt} />
           <div className={styles["fig-caption"]}>{project.figCaption}</div>
         </figure>
       </div>

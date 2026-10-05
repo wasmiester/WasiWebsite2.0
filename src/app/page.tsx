@@ -184,9 +184,7 @@ function StatusPanel() {
         </div>
         <div className={styles["status-row"]}>
           <span className={styles["status-key"]}>Last shipped</span>
-          <span className={styles["status-val"]}>
-            Event-Ingestion-Platform
-          </span>
+          <span className={styles["status-val"]}>NOVA</span>
         </div>
         <div className={styles["status-row"]}>
           <span className={styles["status-key"]}>Prior stop</span>

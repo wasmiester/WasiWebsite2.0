@@ -596,8 +596,13 @@ const timelineItems: TimelineItem[] = [
   },
 ];
 
+const MAIN_TIMELINE_COUNT = 4;
+const mainTimelineItems = timelineItems.slice(0, MAIN_TIMELINE_COUNT);
+const earlierTimelineItems = timelineItems.slice(MAIN_TIMELINE_COUNT);
+
 function ExperienceTimeline() {
   const timelineRef = useRef<HTMLDivElement>(null);
+  const [showEarlier, setShowEarlier] = useState(false);
 
   useEffect(() => {
     const timeline = timelineRef.current;
@@ -630,7 +635,7 @@ function ExperienceTimeline() {
         <p className={styles["section-lede"]}>Seven stops, in order.</p>
 
         <div className={styles.timeline} ref={timelineRef}>
-          {timelineItems.map((item) => (
+          {mainTimelineItems.map((item) => (
             <div className={styles["tl-item"]} key={item.role}>
               <div className={styles["tl-date"]}>
                 {item.dateStart}
@@ -659,6 +664,38 @@ function ExperienceTimeline() {
               </div>
             </div>
           ))}
+
+          <button
+            type="button"
+            className={styles["tl-earlier-pill"]}
+            aria-expanded={showEarlier}
+            onClick={() => setShowEarlier((v) => !v)}
+          >
+            {showEarlier
+              ? "Hide earlier roles"
+              : `+ ${earlierTimelineItems.length} earlier roles`}
+          </button>
+
+          <div
+            className={`${styles["tl-earlier-tray"]} ${showEarlier ? styles["is-open"] : ""}`}
+          >
+            <div>
+              <div className={styles["tl-earlier-tray-inner"]}>
+                {earlierTimelineItems.map((item) => (
+                  <div className={styles["tl-item-compact"]} key={item.role}>
+                    <div className={styles["tl-node-compact"]} aria-hidden="true"></div>
+                    <div className={styles["tl-compact-role"]}>
+                      <b>{item.role}</b> <span>· {item.company}</span>
+                    </div>
+                    <div className={styles["tl-compact-date"]}>
+                      {item.dateStart} {item.dateEnd}
+                    </div>
+                    <p className={styles["tl-compact-note"]}>{item.bullets[0]}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

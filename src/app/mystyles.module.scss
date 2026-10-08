@@ -556,6 +556,73 @@ blockquote.minor-quote cite {
 .tl-bullets li { margin-bottom: 6px; }
 .tl-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 
+/* ---------- Timeline: earlier roles (collapsible panel) ----------
+   All seven roles stay in the DOM regardless of open/closed state --
+   this only controls how much is on screen by default. */
+.tl-earlier-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 6px 0 0;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--signal);
+  background: transparent;
+  color: var(--signal);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.tl-earlier-pill:hover { background: var(--signal); color: #fff; }
+.tl-earlier-pill[aria-expanded="true"] { background: var(--signal); color: #fff; }
+.tl-earlier-pill:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+
+.tl-earlier-tray {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .32s ease;
+}
+.tl-earlier-tray.is-open { grid-template-rows: 1fr; }
+.tl-earlier-tray > div { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  .tl-earlier-tray { transition: none; }
+}
+
+.tl-earlier-tray-inner {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+}
+.tl-item-compact {
+  position: relative;
+  padding-left: 22px;
+  padding-bottom: 16px;
+}
+.tl-item-compact:last-child { padding-bottom: 0; }
+.tl-node-compact {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1px solid var(--muted);
+}
+.tl-compact-role {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 2px;
+}
+.tl-compact-role span { font-weight: 400; color: var(--muted); font-family: var(--font-body); font-size: 0.82rem; }
+.tl-compact-date { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); margin-bottom: 2px; }
+.tl-compact-note { margin: 0; font-size: 12.5px; color: var(--muted); }
+
 /* ---------- Contact ---------- */
 /* section#contact{background;color} lives in globals.css -- same reason
    as section#testimonials above. Everything below now follows the theme

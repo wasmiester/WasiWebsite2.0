@@ -567,7 +567,7 @@ blockquote.minor-quote cite {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  margin: 6px 0 0 146px;
+  margin: 28px 0 0 146px;
   padding: 7px 14px;
   border-radius: 999px;
   border: 1px solid var(--signal);
@@ -585,6 +585,7 @@ blockquote.minor-quote cite {
 @media (max-width: 640px) { .tl-earlier-pill { margin-left: 20px; } }
 
 .tl-earlier-tray {
+  position: relative;
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows .32s ease;
@@ -592,7 +593,22 @@ blockquote.minor-quote cite {
 }
 .tl-earlier-tray.is-open { grid-template-rows: 1fr; }
 .tl-earlier-tray > div { overflow: hidden; }
-@media (max-width: 640px) { .tl-earlier-tray { margin-left: 20px; } }
+/* Line that grows/shrinks alongside the tray opening/closing, realigned
+   (via the negative left) back to the same x-position as the main
+   timeline's own line, since this element itself sits indented 146px. */
+.tl-earlier-tray::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line-strong);
+}
+@media (max-width: 640px) {
+  .tl-earlier-tray { margin-left: 20px; }
+  .tl-earlier-tray::before { left: -20px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .tl-earlier-tray { transition: none; }
 }

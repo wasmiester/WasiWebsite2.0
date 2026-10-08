@@ -558,23 +558,24 @@ blockquote.minor-quote cite {
 
 /* ---------- Contact ---------- */
 /* section#contact{background;color} lives in globals.css -- same reason
-   as section#testimonials above. */
+   as section#testimonials above. Everything below now follows the theme
+   (var(--ink) etc.) instead of fixed hex, since the section itself does. */
 :global(section#contact) .section-title,
-:global(section#contact) .section-lede { color: #F2F3F7; }
+:global(section#contact) .section-lede { color: var(--ink); }
 :global(section#contact) .section-lede { opacity: 0.88; }
 .contact-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
 :global(section#contact) .btn.primary {
-  background: #5B8CFF;
-  border-color: #5B8CFF;
+  background: var(--signal);
+  border-color: var(--signal);
   color: #fff;
 }
 :global(section#contact) .btn.primary:hover { background: #F2F3F7; color: #10172A; border-color: #F2F3F7; }
-:global(section#contact) .btn.ghost { border-color: rgba(242, 243, 247, 0.4); color: #F2F3F7; }
-:global(section#contact) .btn.ghost:hover { border-color: #F2F3F7; }
+:global(section#contact) .btn.ghost { border-color: var(--muted); color: var(--ink); }
+:global(section#contact) .btn.ghost:hover { border-color: var(--ink); }
 .contact-note {
   margin-top: 26px;
   font-size: 14px;
-  color: #F2F3F7;
+  color: var(--ink);
   opacity: 0.82;
   max-width: 52ch;
 }
@@ -601,7 +602,7 @@ blockquote.minor-quote cite {
   display: block;
   font-family: var(--font-mono);
   font-size: 12px;
-  color: #F2F3F7;
+  color: var(--ink);
   opacity: 0.75;
   margin-bottom: 6px;
   letter-spacing: 0.02em;
@@ -611,29 +612,29 @@ blockquote.minor-quote cite {
   width: 100%;
   font-family: var(--font-body);
   font-size: 14.5px;
-  color: #F2F3F7;
-  background: rgba(242, 243, 247, 0.06);
-  border: 1px solid rgba(242, 243, 247, 0.4);
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+  border: 1px solid var(--muted);
   border-radius: 3px;
   padding: 11px 13px;
   resize: vertical;
   transition: border-color .15s ease, background .15s ease;
 }
 .form-field input::placeholder,
-.form-field textarea::placeholder { color: rgba(242, 243, 247, 0.4); }
+.form-field textarea::placeholder { color: var(--muted); }
 .form-field input:focus,
 .form-field textarea:focus {
   outline: none;
-  border-color: #5B8CFF;
-  background: rgba(242, 243, 247, 0.1);
+  border-color: var(--signal);
+  background: color-mix(in srgb, var(--ink) 10%, transparent);
 }
-/* Browsers paint autofilled fields with their own near-white background,
-   which this section's fixed-dark design can't otherwise override. */
+/* Browsers paint autofilled fields with their own background, which
+   would otherwise clash with whichever theme is active here. */
 .form-field input:-webkit-autofill {
-  -webkit-text-fill-color: #F2F3F7;
-  -webkit-box-shadow: 0 0 0 1000px #11182B inset;
-  box-shadow: 0 0 0 1000px #11182B inset;
-  caret-color: #F2F3F7;
+  -webkit-text-fill-color: var(--ink);
+  -webkit-box-shadow: 0 0 0 1000px var(--paper-dim) inset;
+  box-shadow: 0 0 0 1000px var(--paper-dim) inset;
+  caret-color: var(--ink);
 }
 .form-submit-row {
   display: flex;
@@ -643,7 +644,7 @@ blockquote.minor-quote cite {
   margin-top: 4px;
 }
 .form-submit-row .btn {
-  border: 1px solid #5B8CFF;
+  border: 1px solid var(--signal);
   cursor: pointer;
   font-family: var(--font-body);
 }

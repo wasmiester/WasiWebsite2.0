@@ -94,11 +94,13 @@ section#testimonials {
   background: var(--paper-dim);
 }
 
-/* Fixed dark backdrop regardless of theme -- the rest of this section's
-   colors (text, button fills) are overridden in mystyles.module.scss,
-   scoped with :global(section#contact) since id selectors aren't
-   rewritten the way class names are inside a CSS Module. */
+/* Same paper-dim/ink treatment as #testimonials -- cream background with
+   near-black text in light mode, dark navy with off-white text in dark
+   mode. The rest of this section's colors (buttons, form fields) are
+   overridden in mystyles.module.scss, scoped with :global(section#contact)
+   since id selectors aren't rewritten the way class names are inside a
+   CSS Module. */
 section#contact {
-  background: #0D1224;
-  color: #F2F3F7;
+  background: var(--paper-dim);
+  color: var(--ink);
 }

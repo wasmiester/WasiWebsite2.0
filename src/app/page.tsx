@@ -627,7 +627,7 @@ function ExperienceTimeline() {
     <section id="experience">
       <div className={styles.wrap}>
         <h2 className={styles["section-title"]}>Where I&apos;ve worked</h2>
-        <p className={styles["section-lede"]}>Four stops, in order.</p>
+        <p className={styles["section-lede"]}>Seven stops, in order.</p>
 
         <div className={styles.timeline} ref={timelineRef}>
           {timelineItems.map((item) => (

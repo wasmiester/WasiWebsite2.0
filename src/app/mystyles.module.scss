@@ -650,6 +650,36 @@ blockquote.minor-quote cite {
 .tl-compact-date { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); margin-bottom: 2px; }
 .tl-compact-note { margin: 0; font-size: 12.5px; color: var(--muted); }
 
+/* ---------- Education ---------- */
+.edu-list { max-width: 680px; }
+.edu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+.edu-item:first-child { border-top: none; padding-top: 0; }
+.edu-item:last-child { padding-bottom: 0; }
+.edu-school {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin: 0 0 4px;
+}
+.edu-credential { margin: 0; color: var(--muted); font-size: 14.5px; }
+.edu-year {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+@media (max-width: 500px) {
+  .edu-item { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
 /* ---------- Contact ---------- */
 /* section#contact{background;color} lives in globals.css -- same reason
    as section#testimonials above. Everything below now follows the theme

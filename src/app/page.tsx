@@ -94,6 +94,7 @@ function Header() {
             <a href="#projects">Projects</a>
             <a href="#testimonials">Testimonials</a>
             <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
             <a href="#contact">Contact</a>
           </nav>
           <ThemeToggle />
@@ -706,6 +707,55 @@ function ExperienceTimeline() {
   );
 }
 
+/* ---------- Education ---------- */
+
+type EducationItem = {
+  school: string;
+  credential: string;
+  year: string;
+};
+
+const educationItems: EducationItem[] = [
+  {
+    school: "University of British Columbia",
+    credential: "Bachelor of Computer Science",
+    year: "2022",
+  },
+  {
+    school: "Douglas College",
+    credential: "Diploma in Computer Science and Information Systems",
+    year: "2017",
+  },
+  {
+    school: "IBM via Coursera",
+    credential: "Generative AI Engineering Professional Certificate",
+    year: "In progress",
+  },
+];
+
+function Education() {
+  return (
+    <section id="education">
+      <div className={styles.wrap}>
+        <h2 className={styles["section-title"]}>Education</h2>
+        <p className={styles["section-lede"]}>Three stops, in order.</p>
+
+        <div className={styles["edu-list"]}>
+          {educationItems.map((item) => (
+            <div className={styles["edu-item"]} key={item.school}>
+              <div>
+                <h3 className={styles["edu-school"]}>{item.school}</h3>
+                <p className={styles["edu-credential"]}>{item.credential}</p>
+              </div>
+              <div className={styles["edu-year"]}>{item.year}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- Contact ---------- */
 
 type FormStatus = {
@@ -910,6 +960,7 @@ export default function Home() {
         <AsideNote />
         <Testimonials />
         <ExperienceTimeline />
+        <Education />
         <Contact />
       </main>
       <Footer />

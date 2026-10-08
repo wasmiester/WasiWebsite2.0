@@ -635,35 +635,37 @@ function ExperienceTimeline() {
         <p className={styles["section-lede"]}>Seven stops, in order.</p>
 
         <div className={styles.timeline} ref={timelineRef}>
-          {mainTimelineItems.map((item) => (
-            <div className={styles["tl-item"]} key={item.role}>
-              <div className={styles["tl-date"]}>
-                {item.dateStart}
-                <br />
-                {item.dateEnd}
-              </div>
-              <div className={styles["tl-node"]} aria-hidden="true"></div>
-              <div>
-                <h3 className={styles["tl-role"]}>
-                  {item.role} <span>· {item.company}</span>
-                </h3>
-                <ul className={styles["tl-bullets"]}>
-                  {item.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-                {item.tags && (
-                  <div className={styles["tl-tags"]}>
-                    {item.tags.map((tag) => (
-                      <span className={styles.tag} key={tag}>
-                        {tag}
-                      </span>
+          <div className={styles["tl-main-group"]}>
+            {mainTimelineItems.map((item) => (
+              <div className={styles["tl-item"]} key={item.role}>
+                <div className={styles["tl-date"]}>
+                  {item.dateStart}
+                  <br />
+                  {item.dateEnd}
+                </div>
+                <div className={styles["tl-node"]} aria-hidden="true"></div>
+                <div>
+                  <h3 className={styles["tl-role"]}>
+                    {item.role} <span>· {item.company}</span>
+                  </h3>
+                  <ul className={styles["tl-bullets"]}>
+                    {item.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
                     ))}
-                  </div>
-                )}
+                  </ul>
+                  {item.tags && (
+                    <div className={styles["tl-tags"]}>
+                      {item.tags.map((tag) => (
+                        <span className={styles.tag} key={tag}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
 
           <button
             type="button"

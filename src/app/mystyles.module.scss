@@ -563,11 +563,34 @@ blockquote.minor-quote cite {
 /* ---------- Timeline: earlier roles (collapsible panel) ----------
    All seven roles stay in the DOM regardless of open/closed state --
    this only controls how much is on screen by default. */
+/* One wrapper around both the pill and the tray, so the line below is a
+   single element spanning both -- it tracks this group's own natural
+   height (pill + tray, in normal flow), which already grows/shrinks in
+   real time as the tray's own grid-template-rows transition plays, no
+   separate line piece or gap at the pill needed. */
+.tl-earlier-group {
+  position: relative;
+  margin-left: 146px;
+}
+.tl-earlier-group::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line-strong);
+}
+@media (max-width: 640px) {
+  .tl-earlier-group { margin-left: 20px; }
+  .tl-earlier-group::before { left: -20px; }
+}
+
 .tl-earlier-pill {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  margin: 28px 0 0 146px;
+  margin: 28px 0 0;
   padding: 7px 14px;
   border-radius: 999px;
   border: 1px solid var(--signal);
@@ -582,33 +605,14 @@ blockquote.minor-quote cite {
 .tl-earlier-pill:hover { background: var(--signal); color: #fff; }
 .tl-earlier-pill[aria-expanded="true"] { background: var(--signal); color: #fff; }
 .tl-earlier-pill:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
-@media (max-width: 640px) { .tl-earlier-pill { margin-left: 20px; } }
 
 .tl-earlier-tray {
-  position: relative;
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows .32s ease;
-  margin-left: 146px;
 }
 .tl-earlier-tray.is-open { grid-template-rows: 1fr; }
 .tl-earlier-tray > div { overflow: hidden; }
-/* Line that grows/shrinks alongside the tray opening/closing, realigned
-   (via the negative left) back to the same x-position as the main
-   timeline's own line, since this element itself sits indented 146px. */
-.tl-earlier-tray::before {
-  content: "";
-  position: absolute;
-  left: -28px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: var(--line-strong);
-}
-@media (max-width: 640px) {
-  .tl-earlier-tray { margin-left: 20px; }
-  .tl-earlier-tray::before { left: -20px; }
-}
 @media (prefers-reduced-motion: reduce) {
   .tl-earlier-tray { transition: none; }
 }

@@ -667,34 +667,36 @@ function ExperienceTimeline() {
             ))}
           </div>
 
-          <button
-            type="button"
-            className={styles["tl-earlier-pill"]}
-            aria-expanded={showEarlier}
-            onClick={() => setShowEarlier((v) => !v)}
-          >
-            {showEarlier
-              ? "Hide earlier roles"
-              : `+ ${earlierTimelineItems.length} earlier roles`}
-          </button>
+          <div className={styles["tl-earlier-group"]}>
+            <button
+              type="button"
+              className={styles["tl-earlier-pill"]}
+              aria-expanded={showEarlier}
+              onClick={() => setShowEarlier((v) => !v)}
+            >
+              {showEarlier
+                ? "Hide earlier roles"
+                : `+ ${earlierTimelineItems.length} earlier roles`}
+            </button>
 
-          <div
-            className={`${styles["tl-earlier-tray"]} ${showEarlier ? styles["is-open"] : ""}`}
-          >
-            <div>
-              <div className={styles["tl-earlier-tray-inner"]}>
-                {earlierTimelineItems.map((item) => (
-                  <div className={styles["tl-item-compact"]} key={item.role}>
-                    <div className={styles["tl-node-compact"]} aria-hidden="true"></div>
-                    <div className={styles["tl-compact-role"]}>
-                      <b>{item.role}</b> <span>· {item.company}</span>
+            <div
+              className={`${styles["tl-earlier-tray"]} ${showEarlier ? styles["is-open"] : ""}`}
+            >
+              <div>
+                <div className={styles["tl-earlier-tray-inner"]}>
+                  {earlierTimelineItems.map((item) => (
+                    <div className={styles["tl-item-compact"]} key={item.role}>
+                      <div className={styles["tl-node-compact"]} aria-hidden="true"></div>
+                      <div className={styles["tl-compact-role"]}>
+                        <b>{item.role}</b> <span>· {item.company}</span>
+                      </div>
+                      <div className={styles["tl-compact-date"]}>
+                        {item.dateStart} {item.dateEnd}
+                      </div>
+                      <p className={styles["tl-compact-note"]}>{item.bullets[0]}</p>
                     </div>
-                    <div className={styles["tl-compact-date"]}>
-                      {item.dateStart} {item.dateEnd}
-                    </div>
-                    <p className={styles["tl-compact-note"]}>{item.bullets[0]}</p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>

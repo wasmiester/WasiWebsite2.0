@@ -440,7 +440,8 @@ dl.project-facts dd { margin: 0; font-size: 14.5px; color: var(--ink); }
 }
 
 /* ---------- Testimonials ---------- */
-section#testimonials { background: var(--paper-dim); }
+/* section#testimonials{background:var(--paper-dim)} lives in globals.css --
+   a fully-global rule (no local class/id) isn't allowed in a CSS Module. */
 .lead-quote-wrap { position: relative; }
 .quote-mark {
   position: absolute;
@@ -556,22 +557,20 @@ blockquote.minor-quote cite {
 .tl-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 
 /* ---------- Contact ---------- */
-section#contact {
-  background: #0D1224;
-  color: #F2F3F7;
-}
-section#contact .section-title,
-section#contact .section-lede { color: #F2F3F7; }
-section#contact .section-lede { opacity: 0.88; }
+/* section#contact{background;color} lives in globals.css -- same reason
+   as section#testimonials above. */
+:global(section#contact) .section-title,
+:global(section#contact) .section-lede { color: #F2F3F7; }
+:global(section#contact) .section-lede { opacity: 0.88; }
 .contact-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
-section#contact .btn.primary {
+:global(section#contact) .btn.primary {
   background: #5B8CFF;
   border-color: #5B8CFF;
   color: #fff;
 }
-section#contact .btn.primary:hover { background: #F2F3F7; color: #10172A; border-color: #F2F3F7; }
-section#contact .btn.ghost { border-color: rgba(242, 243, 247, 0.4); color: #F2F3F7; }
-section#contact .btn.ghost:hover { border-color: #F2F3F7; }
+:global(section#contact) .btn.primary:hover { background: #F2F3F7; color: #10172A; border-color: #F2F3F7; }
+:global(section#contact) .btn.ghost { border-color: rgba(242, 243, 247, 0.4); color: #F2F3F7; }
+:global(section#contact) .btn.ghost:hover { border-color: #F2F3F7; }
 .contact-note {
   margin-top: 26px;
   font-size: 14px;

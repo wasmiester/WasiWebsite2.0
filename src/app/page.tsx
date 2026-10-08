@@ -19,12 +19,9 @@ function ThemeToggle() {
 
     function currentIsDark() {
       const attr = document.documentElement.getAttribute("data-theme");
-      if (attr === "dark") return true;
       if (attr === "light") return false;
-      return (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      );
+      // "dark" or no attribute at all -- dark is the unconditional default.
+      return true;
     }
 
     function sync() {
@@ -565,6 +562,37 @@ const timelineItems: TimelineItem[] = [
       "Delivered full SDLC for secure profile management and REST APIs, reducing corrupt entries via field-level validation.",
     ],
     tags: ["react", "typescript", "docker"],
+  },
+  {
+    dateStart: "Sep 2019 —",
+    dateEnd: "Aug 2020",
+    role: "Faculty Learning Technologies Rover",
+    company: "University of British Columbia",
+    bullets: [
+      "Provided Tier 1 educational technology support to faculty, helping structure course content and check links within Canvas.",
+      "Supported live virtual classroom sessions in Collaborate Ultra, running platform tests with instructors and students and managing session recordings.",
+    ],
+    tags: ["git", "javascript"],
+  },
+  {
+    dateStart: "Feb 2016 —",
+    dateEnd: "May 2016",
+    role: "Computer Technician",
+    company: "BC Technology for Learning Society",
+    bullets: [
+      "Refurbished and tested computers, printers, and other electronics, troubleshooting and resolving system errors.",
+      "Installed and activated operating systems and utility software, and cloned system images across multiple hard drives.",
+    ],
+  },
+  {
+    dateStart: "Jul 2014 —",
+    dateEnd: "Dec 2015",
+    role: "Teaching Assistant",
+    company: "Douglas College",
+    bullets: [
+      "Designed assignments and course curriculum, and assisted with classroom instruction, exam invigilation, and marking.",
+      "Built a classroom system to track student progress and ensure academic milestones were being met.",
+    ],
   },
 ];
 

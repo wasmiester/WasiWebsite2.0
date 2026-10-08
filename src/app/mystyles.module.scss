@@ -48,13 +48,11 @@ header.site .wrap {
 }
 .theme-toggle:hover { border-color: var(--signal); }
 .theme-toggle svg { width: 16px; height: 16px; }
-.theme-toggle .icon-moon { display: none; }
-:global(:root[data-theme="dark"]) .theme-toggle .icon-sun { display: none; }
-:global(:root[data-theme="dark"]) .theme-toggle .icon-moon { display: block; }
-@media (prefers-color-scheme: dark) {
-  :global(:root:not([data-theme="light"])) .theme-toggle .icon-sun { display: none; }
-  :global(:root:not([data-theme="light"])) .theme-toggle .icon-moon { display: block; }
-}
+/* dark is the default: moon shows, sun is hidden, unless light is explicitly toggled */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+:global(:root[data-theme="light"]) .theme-toggle .icon-sun { display: block; }
+:global(:root[data-theme="light"]) .theme-toggle .icon-moon { display: none; }
 .brand {
   font-family: var(--font-mono);
   font-weight: 500;
@@ -627,8 +625,16 @@ section#contact .btn.ghost:hover { border-color: #F2F3F7; }
 .form-field input:focus,
 .form-field textarea:focus {
   outline: none;
-  border-color: var(--signal);
+  border-color: #5B8CFF;
   background: rgba(242, 243, 247, 0.1);
+}
+/* Browsers paint autofilled fields with their own near-white background,
+   which this section's fixed-dark design can't otherwise override. */
+.form-field input:-webkit-autofill {
+  -webkit-text-fill-color: #F2F3F7;
+  -webkit-box-shadow: 0 0 0 1000px #11182B inset;
+  box-shadow: 0 0 0 1000px #11182B inset;
+  caret-color: #F2F3F7;
 }
 .form-submit-row {
   display: flex;
@@ -638,7 +644,7 @@ section#contact .btn.ghost:hover { border-color: #F2F3F7; }
   margin-top: 4px;
 }
 .form-submit-row .btn {
-  border: 1px solid var(--signal);
+  border: 1px solid #5B8CFF;
   cursor: pointer;
   font-family: var(--font-body);
 }

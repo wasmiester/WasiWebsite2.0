@@ -1,16 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #0D0D0D;
+  /* Dark is the default theme, regardless of OS/browser preference.
+     Light only applies when [data-theme="light"] is explicitly set
+     by the toggle (see :root[data-theme="light"] below). */
+  --ink: #F2F3F7;
   --ink-soft: #2A3350;
-  --paper: #F6F4F0;
-  --paper-dim: #ECE7DC;
-  --signal: #1E466B;
-  --muted: #5C7284;
-  --line: #DCE7F2;
-  --line-strong: #67BAF4;
-  --nav-bg: rgba(246, 244, 240, 0.92);
-  --panel-shadow: 0 18px 40px -18px rgba(16, 23, 42, 0.42);
+  --paper: #05070A;
+  --paper-dim: #0D1224;
+  --signal: #5B8CFF;
+  --muted: #8B93A7;
+  --line: #1E2740;
+  --line-strong: #2A3760;
+  --nav-bg: rgba(5, 7, 10, 0.88);
+  --panel-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.7);
 
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-body: 'IBM Plex Sans', system-ui, sans-serif;
@@ -29,32 +32,6 @@
   --panel-val: #F2F3F7;
   --panel-titlebar: #8B93A7;
   --panel-accent: #5EEAD4;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --ink: #F2F3F7;
-    --paper: #05070A;
-    --paper-dim: #0D1224;
-    --signal: #5B8CFF;
-    --muted: #8B93A7;
-    --line: #1E2740;
-    --line-strong: #2A3760;
-    --nav-bg: rgba(5, 7, 10, 0.88);
-    --panel-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.7);
-  }
-}
-
-:root[data-theme="dark"] {
-  --ink: #F2F3F7;
-  --paper: #05070A;
-  --paper-dim: #0D1224;
-  --signal: #5B8CFF;
-  --muted: #8B93A7;
-  --line: #1E2740;
-  --line-strong: #2A3760;
-  --nav-bg: rgba(5, 7, 10, 0.88);
-  --panel-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.7);
 }
 
 :root[data-theme="light"] {

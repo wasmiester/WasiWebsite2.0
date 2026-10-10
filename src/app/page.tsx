@@ -19,12 +19,9 @@ function ThemeToggle() {
 
     function currentIsDark() {
       const attr = document.documentElement.getAttribute("data-theme");
-      if (attr === "dark") return true;
       if (attr === "light") return false;
-      return (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      );
+      // "dark" or no attribute at all -- dark is the unconditional default.
+      return true;
     }
 
     function sync() {
@@ -97,6 +94,7 @@ function Header() {
             <a href="#projects">Projects</a>
             <a href="#testimonials">Testimonials</a>
             <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
             <a href="#contact">Contact</a>
           </nav>
           <ThemeToggle />
@@ -566,10 +564,46 @@ const timelineItems: TimelineItem[] = [
     ],
     tags: ["react", "typescript", "docker"],
   },
+  {
+    dateStart: "Sep 2019 —",
+    dateEnd: "Aug 2020",
+    role: "Faculty Learning Technologies Rover",
+    company: "University of British Columbia",
+    bullets: [
+      "Provided Tier 1 educational technology support to faculty, helping structure course content and check links within Canvas.",
+      "Supported live virtual classroom sessions in Collaborate Ultra, running platform tests with instructors and students and managing session recordings.",
+    ],
+    tags: ["git", "javascript"],
+  },
+  {
+    dateStart: "Feb 2016 —",
+    dateEnd: "May 2016",
+    role: "Computer Technician",
+    company: "BC Technology for Learning Society",
+    bullets: [
+      "Refurbished and tested computers, printers, and other electronics, troubleshooting and resolving system errors.",
+      "Installed and activated operating systems and utility software, and cloned system images across multiple hard drives.",
+    ],
+  },
+  {
+    dateStart: "Jul 2014 —",
+    dateEnd: "Dec 2015",
+    role: "Teaching Assistant",
+    company: "Douglas College",
+    bullets: [
+      "Designed assignments and course curriculum, and assisted with classroom instruction, exam invigilation, and marking.",
+      "Built a classroom system to track student progress and ensure academic milestones were being met.",
+    ],
+  },
 ];
+
+const MAIN_TIMELINE_COUNT = 4;
+const mainTimelineItems = timelineItems.slice(0, MAIN_TIMELINE_COUNT);
+const earlierTimelineItems = timelineItems.slice(MAIN_TIMELINE_COUNT);
 
 function ExperienceTimeline() {
   const timelineRef = useRef<HTMLDivElement>(null);
+  const [showEarlier, setShowEarlier] = useState(false);
 
   useEffect(() => {
     const timeline = timelineRef.current;
@@ -599,36 +633,121 @@ function ExperienceTimeline() {
     <section id="experience">
       <div className={styles.wrap}>
         <h2 className={styles["section-title"]}>Where I&apos;ve worked</h2>
-        <p className={styles["section-lede"]}>Four stops, in order.</p>
+        <p className={styles["section-lede"]}>Seven stops, in order.</p>
 
         <div className={styles.timeline} ref={timelineRef}>
-          {timelineItems.map((item) => (
-            <div className={styles["tl-item"]} key={item.role}>
-              <div className={styles["tl-date"]}>
-                {item.dateStart}
-                <br />
-                {item.dateEnd}
-              </div>
-              <div className={styles["tl-node"]} aria-hidden="true"></div>
-              <div>
-                <h3 className={styles["tl-role"]}>
-                  {item.role} <span>· {item.company}</span>
-                </h3>
-                <ul className={styles["tl-bullets"]}>
-                  {item.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-                {item.tags && (
-                  <div className={styles["tl-tags"]}>
-                    {item.tags.map((tag) => (
-                      <span className={styles.tag} key={tag}>
-                        {tag}
-                      </span>
+          <div className={styles["tl-main-group"]}>
+            {mainTimelineItems.map((item) => (
+              <div className={styles["tl-item"]} key={item.role}>
+                <div className={styles["tl-date"]}>
+                  {item.dateStart}
+                  <br />
+                  {item.dateEnd}
+                </div>
+                <div className={styles["tl-node"]} aria-hidden="true"></div>
+                <div>
+                  <h3 className={styles["tl-role"]}>
+                    {item.role} <span>· {item.company}</span>
+                  </h3>
+                  <ul className={styles["tl-bullets"]}>
+                    {item.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
                     ))}
-                  </div>
-                )}
+                  </ul>
+                  {item.tags && (
+                    <div className={styles["tl-tags"]}>
+                      {item.tags.map((tag) => (
+                        <span className={styles.tag} key={tag}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
+            ))}
+          </div>
+
+          <div className={styles["tl-earlier-group"]}>
+            <button
+              type="button"
+              className={styles["tl-earlier-pill"]}
+              aria-expanded={showEarlier}
+              onClick={() => setShowEarlier((v) => !v)}
+            >
+              {showEarlier
+                ? "Hide earlier roles"
+                : `+ ${earlierTimelineItems.length} earlier roles`}
+            </button>
+
+            <div
+              className={`${styles["tl-earlier-tray"]} ${showEarlier ? styles["is-open"] : ""}`}
+            >
+              <div>
+                <div className={styles["tl-earlier-tray-inner"]}>
+                  {earlierTimelineItems.map((item) => (
+                    <div className={styles["tl-item-compact"]} key={item.role}>
+                      <div className={styles["tl-node-compact"]} aria-hidden="true"></div>
+                      <div className={styles["tl-compact-role"]}>
+                        <b>{item.role}</b> <span>· {item.company}</span>
+                      </div>
+                      <div className={styles["tl-compact-date"]}>
+                        {item.dateStart} {item.dateEnd}
+                      </div>
+                      <p className={styles["tl-compact-note"]}>{item.bullets[0]}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Education ---------- */
+
+type EducationItem = {
+  school: string;
+  credential: string;
+  year: string;
+};
+
+const educationItems: EducationItem[] = [
+  {
+    school: "University of British Columbia",
+    credential: "Bachelor of Computer Science",
+    year: "2022",
+  },
+  {
+    school: "Douglas College",
+    credential: "Diploma in Computer Science and Information Systems",
+    year: "2017",
+  },
+  {
+    school: "IBM via Coursera",
+    credential: "Generative AI Engineering Professional Certificate",
+    year: "In progress",
+  },
+];
+
+function Education() {
+  return (
+    <section id="education">
+      <div className={styles.wrap}>
+        <h2 className={styles["section-title"]}>Education</h2>
+        <p className={styles["section-lede"]}>Three stops, in order.</p>
+
+        <div className={styles["edu-list"]}>
+          {educationItems.map((item) => (
+            <div className={styles["edu-item"]} key={item.school}>
+              <div>
+                <h3 className={styles["edu-school"]}>{item.school}</h3>
+                <p className={styles["edu-credential"]}>{item.credential}</p>
+              </div>
+              <div className={styles["edu-year"]}>{item.year}</div>
             </div>
           ))}
         </div>
@@ -841,6 +960,7 @@ export default function Home() {
         <AsideNote />
         <Testimonials />
         <ExperienceTimeline />
+        <Education />
         <Contact />
       </main>
       <Footer />

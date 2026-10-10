@@ -48,13 +48,11 @@ header.site .wrap {
 }
 .theme-toggle:hover { border-color: var(--signal); }
 .theme-toggle svg { width: 16px; height: 16px; }
-.theme-toggle .icon-moon { display: none; }
-:global(:root[data-theme="dark"]) .theme-toggle .icon-sun { display: none; }
-:global(:root[data-theme="dark"]) .theme-toggle .icon-moon { display: block; }
-@media (prefers-color-scheme: dark) {
-  :global(:root:not([data-theme="light"])) .theme-toggle .icon-sun { display: none; }
-  :global(:root:not([data-theme="light"])) .theme-toggle .icon-moon { display: block; }
-}
+/* dark is the default: moon shows, sun is hidden, unless light is explicitly toggled */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+:global(:root[data-theme="light"]) .theme-toggle .icon-sun { display: block; }
+:global(:root[data-theme="light"]) .theme-toggle .icon-moon { display: none; }
 .brand {
   font-family: var(--font-mono);
   font-weight: 500;
@@ -123,7 +121,7 @@ section.hero::before {
   background-size: 26px 26px;
   -webkit-mask-image: linear-gradient(to bottom, black, transparent 78%);
   mask-image: linear-gradient(to bottom, black, transparent 78%);
-  opacity: 0.5;
+  opacity: 0.6;
   pointer-events: none;
 }
 section.hero .wrap { position: relative; }
@@ -442,7 +440,8 @@ dl.project-facts dd { margin: 0; font-size: 14.5px; color: var(--ink); }
 }
 
 /* ---------- Testimonials ---------- */
-section#testimonials { background: var(--paper-dim); }
+/* section#testimonials{background:var(--paper-dim)} lives in globals.css --
+   a fully-global rule (no local class/id) isn't allowed in a CSS Module. */
 .lead-quote-wrap { position: relative; }
 .quote-mark {
   position: absolute;
@@ -493,19 +492,23 @@ blockquote.minor-quote cite {
 
 /* ---------- Experience timeline ---------- */
 .timeline { position: relative; max-width: 820px; }
-.timeline::before {
+/* The connecting line lives on tl-main-group (just the 4 main items),
+   not on .timeline itself -- otherwise it stretches down through the
+   earlier-roles pill/tray below, which aren't part of the sequence. */
+.tl-main-group { position: relative; }
+.tl-main-group::before {
   content: "";
   position: absolute;
   left: 118px;
   top: 6px;
-  bottom: 6px;
+  bottom: 0;
   width: 1px;
   background: var(--line-strong);
   transform-origin: top;
   transition: transform 1s cubic-bezier(.22, .8, .22, 1);
 }
-.timeline.tl-pending::before { transform: scaleY(0); }
-@media (max-width: 640px) { .timeline::before { left: 0; } }
+.timeline.tl-pending .tl-main-group::before { transform: scaleY(0); }
+@media (max-width: 640px) { .tl-main-group::before { left: 0; } }
 .tl-item {
   position: relative;
   display: grid;
@@ -541,8 +544,8 @@ blockquote.minor-quote cite {
 .timeline.tl-pending .tl-item:nth-child(4) .tl-node { transition-delay: 1.05s; }
 @media (max-width: 640px) { .tl-node { left: -5px; } }
 @media (prefers-reduced-motion: reduce) {
-  .timeline::before { transition: none; }
-  .timeline.tl-pending::before { transform: none; }
+  .tl-main-group::before { transition: none; }
+  .timeline.tl-pending .tl-main-group::before { transform: none; }
   .tl-node { transition: none; }
   .timeline.tl-pending .tl-node { opacity: 1; transform: none; }
 }
@@ -557,27 +560,146 @@ blockquote.minor-quote cite {
 .tl-bullets li { margin-bottom: 6px; }
 .tl-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 
-/* ---------- Contact ---------- */
-section#contact {
-  background: #0D1224;
-  color: #F2F3F7;
+/* ---------- Timeline: earlier roles (collapsible panel) ----------
+   All seven roles stay in the DOM regardless of open/closed state --
+   this only controls how much is on screen by default. */
+/* One wrapper around both the pill and the tray, so the line below is a
+   single element spanning both -- it tracks this group's own natural
+   height (pill + tray, in normal flow), which already grows/shrinks in
+   real time as the tray's own grid-template-rows transition plays, no
+   separate line piece or gap at the pill needed. */
+.tl-earlier-group {
+  position: relative;
+  margin-left: 146px;
 }
-section#contact .section-title,
-section#contact .section-lede { color: #F2F3F7; }
-section#contact .section-lede { opacity: 0.88; }
+.tl-earlier-group::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line-strong);
+}
+@media (max-width: 640px) {
+  .tl-earlier-group { margin-left: 20px; }
+  .tl-earlier-group::before { left: -20px; }
+}
+
+.tl-earlier-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 28px 0 0;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--signal);
+  background: transparent;
+  color: var(--signal);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.tl-earlier-pill:hover { background: var(--signal); color: #fff; }
+.tl-earlier-pill[aria-expanded="true"] { background: var(--signal); color: #fff; }
+.tl-earlier-pill:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+
+.tl-earlier-tray {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .32s ease;
+}
+.tl-earlier-tray.is-open { grid-template-rows: 1fr; }
+.tl-earlier-tray > div { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  .tl-earlier-tray { transition: none; }
+}
+
+.tl-earlier-tray-inner {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+}
+.tl-item-compact {
+  position: relative;
+  padding-left: 22px;
+  padding-bottom: 16px;
+}
+.tl-item-compact:last-child { padding-bottom: 0; }
+.tl-node-compact {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1px solid var(--muted);
+}
+.tl-compact-role {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 2px;
+}
+.tl-compact-role span { font-weight: 400; color: var(--muted); font-family: var(--font-body); font-size: 0.82rem; }
+.tl-compact-date { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); margin-bottom: 2px; }
+.tl-compact-note { margin: 0; font-size: 12.5px; color: var(--muted); }
+
+/* ---------- Education ---------- */
+.edu-list { max-width: 680px; }
+.edu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+.edu-item:first-child { border-top: none; padding-top: 0; }
+.edu-item:last-child { padding-bottom: 0; }
+.edu-school {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin: 0 0 4px;
+}
+.edu-credential { margin: 0; color: var(--muted); font-size: 14.5px; }
+.edu-year {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+@media (max-width: 500px) {
+  .edu-item { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
+/* ---------- Contact ---------- */
+/* section#contact{background;color} lives in globals.css -- same reason
+   as section#testimonials above. Everything below now follows the theme
+   (var(--ink) etc.) instead of fixed hex, since the section itself does. */
+:global(section#contact) .section-title,
+:global(section#contact) .section-lede { color: var(--ink); }
+:global(section#contact) .section-lede { opacity: 0.88; }
 .contact-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
-section#contact .btn.primary {
+:global(section#contact) .btn.primary {
   background: var(--signal);
   border-color: var(--signal);
   color: #fff;
 }
-section#contact .btn.primary:hover { background: #F2F3F7; color: #10172A; border-color: #F2F3F7; }
-section#contact .btn.ghost { border-color: rgba(242, 243, 247, 0.4); color: #F2F3F7; }
-section#contact .btn.ghost:hover { border-color: #F2F3F7; }
+:global(section#contact) .btn.primary:hover { background: #F2F3F7; color: #10172A; border-color: #F2F3F7; }
+:global(section#contact) .btn.ghost { border-color: var(--muted); color: var(--ink); }
+:global(section#contact) .btn.ghost:hover { border-color: var(--ink); }
 .contact-note {
   margin-top: 26px;
   font-size: 14px;
-  color: #F2F3F7;
+  color: var(--ink);
   opacity: 0.82;
   max-width: 52ch;
 }
@@ -604,7 +726,7 @@ section#contact .btn.ghost:hover { border-color: #F2F3F7; }
   display: block;
   font-family: var(--font-mono);
   font-size: 12px;
-  color: #F2F3F7;
+  color: var(--ink);
   opacity: 0.75;
   margin-bottom: 6px;
   letter-spacing: 0.02em;
@@ -614,21 +736,29 @@ section#contact .btn.ghost:hover { border-color: #F2F3F7; }
   width: 100%;
   font-family: var(--font-body);
   font-size: 14.5px;
-  color: #F2F3F7;
-  background: rgba(242, 243, 247, 0.06);
-  border: 1px solid rgba(242, 243, 247, 0.4);
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+  border: 1px solid var(--muted);
   border-radius: 3px;
   padding: 11px 13px;
   resize: vertical;
   transition: border-color .15s ease, background .15s ease;
 }
 .form-field input::placeholder,
-.form-field textarea::placeholder { color: rgba(242, 243, 247, 0.4); }
+.form-field textarea::placeholder { color: var(--muted); }
 .form-field input:focus,
 .form-field textarea:focus {
   outline: none;
   border-color: var(--signal);
-  background: rgba(242, 243, 247, 0.1);
+  background: color-mix(in srgb, var(--ink) 10%, transparent);
+}
+/* Browsers paint autofilled fields with their own background, which
+   would otherwise clash with whichever theme is active here. */
+.form-field input:-webkit-autofill {
+  -webkit-text-fill-color: var(--ink);
+  -webkit-box-shadow: 0 0 0 1000px var(--paper-dim) inset;
+  box-shadow: 0 0 0 1000px var(--paper-dim) inset;
+  caret-color: var(--ink);
 }
 .form-submit-row {
   display: flex;

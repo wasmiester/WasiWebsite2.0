@@ -1,16 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #10172A;
+  /* Dark is the default theme, regardless of OS/browser preference.
+     Light only applies when [data-theme="light"] is explicitly set
+     by the toggle (see :root[data-theme="light"] below). */
+  --ink: #F2F3F7;
   --ink-soft: #2A3350;
-  --paper: #F3F5FA;
-  --paper-dim: #E6E9F2;
-  --signal: #4A7AEF;
-  --muted: #5B6478;
-  --line: #D7DCE8;
-  --line-strong: #B7C0D6;
-  --nav-bg: rgba(243, 245, 250, 0.92);
-  --panel-shadow: 0 18px 40px -18px rgba(16, 23, 42, 0.35);
+  --paper: #05070A;
+  --paper-dim: #0D1224;
+  --signal: #5B8CFF;
+  --muted: #8B93A7;
+  --line: #1E2740;
+  --line-strong: #2A3760;
+  --nav-bg: rgba(5, 7, 10, 0.88);
+  --panel-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.7);
 
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-body: 'IBM Plex Sans', system-ui, sans-serif;
@@ -31,42 +34,16 @@
   --panel-accent: #5EEAD4;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --ink: #F2F3F7;
-    --paper: #05070A;
-    --paper-dim: #0D1224;
-    --signal: #5B8CFF;
-    --muted: #8B93A7;
-    --line: #1E2740;
-    --line-strong: #2A3760;
-    --nav-bg: rgba(5, 7, 10, 0.88);
-    --panel-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.7);
-  }
-}
-
-:root[data-theme="dark"] {
-  --ink: #F2F3F7;
-  --paper: #05070A;
-  --paper-dim: #0D1224;
-  --signal: #5B8CFF;
-  --muted: #8B93A7;
-  --line: #1E2740;
-  --line-strong: #2A3760;
-  --nav-bg: rgba(5, 7, 10, 0.88);
-  --panel-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.7);
-}
-
 :root[data-theme="light"] {
-  --ink: #10172A;
-  --paper: #F3F5FA;
-  --paper-dim: #E6E9F2;
-  --signal: #4A7AEF;
-  --muted: #5B6478;
-  --line: #D7DCE8;
-  --line-strong: #B7C0D6;
-  --nav-bg: rgba(243, 245, 250, 0.92);
-  --panel-shadow: 0 18px 40px -18px rgba(16, 23, 42, 0.35);
+  --ink: #0D0D0D;
+  --paper: #F6F4F0;
+  --paper-dim: #ECE7DC;
+  --signal: #1E466B;
+  --muted: #5C7284;
+  --line: #DCE7F2;
+  --line-strong: #67BAF4;
+  --nav-bg: rgba(246, 244, 240, 0.92);
+  --panel-shadow: 0 18px 40px -18px rgba(16, 23, 42, 0.42);
 }
 
 *,
@@ -111,4 +88,19 @@ section {
 
 section + section {
   border-top: 1px solid var(--line);
+}
+
+section#testimonials {
+  background: var(--paper-dim);
+}
+
+/* Same paper-dim/ink treatment as #testimonials -- cream background with
+   near-black text in light mode, dark navy with off-white text in dark
+   mode. The rest of this section's colors (buttons, form fields) are
+   overridden in mystyles.module.scss, scoped with :global(section#contact)
+   since id selectors aren't rewritten the way class names are inside a
+   CSS Module. */
+section#contact {
+  background: var(--paper-dim);
+  color: var(--ink);
 }

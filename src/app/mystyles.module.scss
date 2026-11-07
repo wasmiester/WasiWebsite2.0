@@ -62,8 +62,10 @@ header.site .wrap {
   color: var(--ink);
 }
 .brand-path { color: var(--muted); }
-nav.primary { display: flex; gap: 28px; }
+nav.primary { position: relative; display: flex; gap: 28px; }
 nav.primary a {
+  position: relative;
+  z-index: 1;
   font-size: 14px;
   text-decoration: none;
   color: var(--ink);
@@ -73,6 +75,20 @@ nav.primary a {
   transition: opacity .15s ease, border-color .15s ease;
 }
 nav.primary a:hover { opacity: 1; border-color: var(--signal); }
+nav.primary a[aria-current="true"] { opacity: 1; }
+.nav-highlight {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--signal);
+  opacity: 0;
+  transition: transform .3s cubic-bezier(.22, .8, .22, 1), width .3s cubic-bezier(.22, .8, .22, 1), opacity .2s ease;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-highlight { transition: opacity .2s ease; }
+}
 nav.primary a:focus-visible, .btn:focus-visible {
   outline: 2px solid var(--signal);
   outline-offset: 3px;

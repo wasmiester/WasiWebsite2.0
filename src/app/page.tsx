@@ -78,7 +78,62 @@ function ThemeToggle() {
   );
 }
 
+const NAV_SECTIONS = [
+  { id: "projects", label: "Projects" },
+  { id: "testimonials", label: "Testimonials" },
+  { id: "experience", label: "Experience" },
+  { id: "education", label: "Education" },
+  { id: "contact", label: "Contact" },
+];
+
 function Header() {
+  const navRef = useRef<HTMLElement>(null);
+  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const [highlight, setHighlight] = useState<{ left: number; width: number } | null>(null);
+
+  // Track which section is currently in view -- purely cosmetic, so a
+  // missing IntersectionObserver just means no highlight ever appears,
+  // nothing about the nav itself depends on it.
+  useEffect(() => {
+    const sections = NAV_SECTIONS.map((s) => document.getElementById(s.id)).filter(
+      (el): el is HTMLElement => !!el,
+    );
+    if (sections.length === 0 || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length > 0) {
+          const top = visible.reduce((a, b) =>
+            a.boundingClientRect.top < b.boundingClientRect.top ? a : b,
+          );
+          setActiveId(top.target.id);
+        }
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
+    );
+    sections.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  // Measure the active link's position/width whenever it changes, and on
+  // resize (the mobile nav wraps/scrolls, so link positions can shift).
+  useEffect(() => {
+    function measure() {
+      if (!activeId) {
+        setHighlight(null);
+        return;
+      }
+      const link = linkRefs.current[activeId];
+      if (!link) return;
+      setHighlight({ left: link.offsetLeft, width: link.offsetWidth });
+    }
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [activeId]);
+
   return (
     <header className={styles.site}>
       <div className={styles.wrap}>
@@ -90,12 +145,32 @@ function Header() {
           <span className={styles["brand-path"]}>~/</span>WasiR
         </a>
         <div className={styles["nav-right"]}>
-          <nav className={styles.primary} aria-label="Primary">
-            <a href="#projects">Projects</a>
-            <a href="#testimonials">Testimonials</a>
-            <a href="#experience">Experience</a>
-            <a href="#education">Education</a>
-            <a href="#contact">Contact</a>
+          <nav className={styles.primary} aria-label="Primary" ref={navRef}>
+            {NAV_SECTIONS.map((s) => (
+              <a
+                key={s.id}
+                href={`#${s.id}`}
+                ref={(el) => {
+                  linkRefs.current[s.id] = el;
+                }}
+                aria-current={activeId === s.id ? "true" : undefined}
+              >
+                {s.label}
+              </a>
+            ))}
+            <span
+              className={styles["nav-highlight"]}
+              aria-hidden="true"
+              style={
+                highlight
+                  ? {
+                      opacity: 1,
+                      width: `${highlight.width}px`,
+                      transform: `translateX(${highlight.left}px)`,
+                    }
+                  : { opacity: 0 }
+              }
+            />
           </nav>
           <ThemeToggle />
         </div>

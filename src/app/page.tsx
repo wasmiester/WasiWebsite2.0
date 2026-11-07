@@ -91,6 +91,7 @@ function Header() {
   const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const [activeId, setActiveId] = useState<string | null>(null);
   const [highlight, setHighlight] = useState<{ left: number; width: number } | null>(null);
+  const prevHighlightRef = useRef<{ left: number; width: number } | null>(null);
 
   // Track which section is currently in view -- purely cosmetic, so a
   // missing IntersectionObserver just means no highlight ever appears,
@@ -119,19 +120,50 @@ function Header() {
 
   // Measure the active link's position/width whenever it changes, and on
   // resize (the mobile nav wraps/scrolls, so link positions can shift).
+  // Rather than just sliding straight to the new link, the bar first
+  // stretches to span both the old and new link, then settles onto the
+  // new one -- same idea as Vercel/Linear's nav underlines.
   useEffect(() => {
+    let settleTimeout: ReturnType<typeof setTimeout> | undefined;
+
     function measure() {
       if (!activeId) {
         setHighlight(null);
+        prevHighlightRef.current = null;
         return;
       }
       const link = linkRefs.current[activeId];
       if (!link) return;
-      setHighlight({ left: link.offsetLeft, width: link.offsetWidth });
+
+      const next = { left: link.offsetLeft, width: link.offsetWidth };
+      const prev = prevHighlightRef.current;
+      const reduceMotion =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (settleTimeout) clearTimeout(settleTimeout);
+
+      const moved = prev && (prev.left !== next.left || prev.width !== next.width);
+      if (!reduceMotion && moved && prev) {
+        const unionLeft = Math.min(prev.left, next.left);
+        const unionRight = Math.max(prev.left + prev.width, next.left + next.width);
+        setHighlight({ left: unionLeft, width: unionRight - unionLeft });
+        settleTimeout = setTimeout(() => {
+          setHighlight(next);
+          prevHighlightRef.current = next;
+        }, 140);
+      } else {
+        setHighlight(next);
+        prevHighlightRef.current = next;
+      }
     }
+
     measure();
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    return () => {
+      window.removeEventListener("resize", measure);
+      if (settleTimeout) clearTimeout(settleTimeout);
+    };
   }, [activeId]);
 
   return (
